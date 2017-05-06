@@ -29,7 +29,7 @@ public abstract class Character extends Drawable {
             }
 
             case RIGHT: {
-                if (newPosition.getColumn() <= TerminalGUI.getMaxColumn()) {
+                if (newPosition.getColumn() < TerminalGUI.getMaxColumn() - 1) {
                     newPosition = newPosition.withColumn(newPosition.getColumn() + 1);
                 }
                 break;
@@ -43,7 +43,7 @@ public abstract class Character extends Drawable {
             }
 
             case DOWN: {
-                if (newPosition.getRow() <= TerminalGUI.getMaxRow()) {
+                if (newPosition.getRow() < TerminalGUI.getMaxRow() - 1) {
                     newPosition = newPosition.withRow(newPosition.getRow() + 1);
                 }
                 break;
