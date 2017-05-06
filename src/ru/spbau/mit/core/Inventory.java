@@ -51,7 +51,8 @@ public class Inventory extends Drawable {
             } else {
                 for (Item item : items) {
                     ab.addAction(item.getItemName(), () -> {
-                        // TODO : here needs to be equip ation
+
+                        // TODO : here needs to be equip action
                     });
                 }
             }

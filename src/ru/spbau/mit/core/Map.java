@@ -75,8 +75,10 @@ public class Map {
         return items.get(position) != null;
     }
 
-    public Item getItemOnPosition(TerminalPosition position) {
-        return items.get(position);
+    public Item removeItemOnPosition(TerminalPosition position) {
+        Item item = items.get(position);
+        items.remove(position);
+        return item;
     }
 
     public boolean isCellFree(TerminalPosition position) {
