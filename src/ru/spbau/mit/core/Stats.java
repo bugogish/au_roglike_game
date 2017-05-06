@@ -1,7 +1,6 @@
 package ru.spbau.mit.core;
 
 public class Stats {
-    // TODO : Remove placeholder default stats
     private int health;
     private int stamina;
     private int armor;

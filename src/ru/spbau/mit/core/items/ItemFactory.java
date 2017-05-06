@@ -2,11 +2,13 @@ package ru.spbau.mit.core.items;
 
 // TODO : Implement - this is a placeholder
 
+import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.core.Stats;
 
 public class ItemFactory {
     private ItemFactory(){}
 
+    @NotNull
     public static Item createDefaultItem(ItemType type) {
         switch (type) {
             case DAGGER: {
@@ -16,7 +18,7 @@ public class ItemFactory {
                 return new Shield();
             }
             default: {
-                return null;
+                return new Dagger();
             }
         }
     }

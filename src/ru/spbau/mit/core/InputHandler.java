@@ -46,6 +46,11 @@ public class InputHandler {
                 case ArrowUp: {
                         return new MoveAction(Direction.UP);
                 }
+
+                case EOF: {
+                    return gameState -> gameState.setGameOver(true);
+                }
+
                 default: {
                     return gameState -> {};
                 }

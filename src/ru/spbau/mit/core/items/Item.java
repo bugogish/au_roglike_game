@@ -1,20 +1,25 @@
 package ru.spbau.mit.core.items;
 
-import com.googlecode.lanterna.TerminalPosition;
-import ru.spbau.mit.core.GUI.TerminalGUI;
-import ru.spbau.mit.core.Stats;
 import ru.spbau.mit.core.GUI.Drawable;
-
-import java.io.IOException;
-import java.util.Random;
+import ru.spbau.mit.core.Stats;
+import ru.spbau.mit.utils.Cell;
 
 public abstract class Item extends Drawable {
     private final String itemName;
     private final String description;
     private Stats changeToStats;
+    private boolean equipped = false;
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
+    }
 
     public Item(String name, String description, Stats changeToStats, char itemIcon) {
-        super(itemIcon, new TerminalPosition(0, 0));
+        super(itemIcon, new Cell(0, 0));
 
         itemName = name;
         this.description = description;
