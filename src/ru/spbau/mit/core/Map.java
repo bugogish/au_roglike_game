@@ -19,6 +19,7 @@ public class Map {
         Random rand = new Random();
 
         while (obstacles.size() < GameState.numberOfObstacles) {
+            // TODO : transform this into condition when obstacle cant be generated at player's position
             TerminalPosition obsPos = new TerminalPosition(rand.nextInt(GUI.getMaxColumn() - 1) + 1,
                     rand.nextInt(GUI.getMaxRow() - 1) + 1);
             obstacles.add(new Drawable(obstacleSymbol, obsPos) {});
