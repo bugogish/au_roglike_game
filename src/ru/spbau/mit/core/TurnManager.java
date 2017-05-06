@@ -44,7 +44,6 @@ public class TurnManager {
             Item maybeItem = mGameState.getCurrentMap().removeItemOnPosition(player.getCurrentPosition());
             if (maybeItem != null) {
                 player.pickUp(maybeItem);
-                maybeItem.clear();
             }
         }
     }
