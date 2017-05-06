@@ -24,6 +24,8 @@ public class TurnManager {
         }
 
         if (opponent.isDead()) {
+            System.out.println("Mob is dead!");
+            mGameState.killMob(opponent);
             opponent.clear();
         }
     }

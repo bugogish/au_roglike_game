@@ -61,5 +61,9 @@ public class TerminalGUI {
     public static MultiWindowTextGUI createNewScreen() throws IOException {
         return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
+
+    public static void terminate() throws IOException {
+        terminal.close();
+    }
 }
 

@@ -42,21 +42,4 @@ public abstract class Drawable {
     public char getIcon() {
         return icon;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Drawable drawable = (Drawable) o;
-
-        return current.equals(drawable.current);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = current.hashCode();
-        result = 31 * result;
-        return result;
-    }
 }
