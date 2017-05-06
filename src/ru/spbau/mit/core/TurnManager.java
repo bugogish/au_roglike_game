@@ -28,17 +28,21 @@ public class TurnManager {
     }
 
     public static void handlePlayersTurn(GameState mGameState) throws IOException {
-        InputHandler.handleInput().doAction(mGameState);
-        Player player = mGameState.getPlayer();
+        mGameState.setPlayersTurn(true);
 
-        if (mGameState.isFightSituation()) {
-            handleFight(mGameState);
-        }
+        while (mGameState.isPlayersTurn()) {
+            InputHandler.handleInput().doAction(mGameState);
+            Player player = mGameState.getPlayer();
 
-        Item maybeItem = mGameState.getCurrentMap().getItemOnPosition(player.getCurrentPosition());
-        if (maybeItem != null) {
-            player.pickUp(maybeItem);
-            maybeItem.clear();
+            if (mGameState.isFightSituation()) {
+                handleFight(mGameState);
+            }
+
+            Item maybeItem = mGameState.getCurrentMap().getItemOnPosition(player.getCurrentPosition());
+            if (maybeItem != null) {
+                player.pickUp(maybeItem);
+                maybeItem.clear();
+            }
         }
     }
 
