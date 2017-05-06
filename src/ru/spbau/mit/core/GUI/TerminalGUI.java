@@ -1,5 +1,7 @@
 package ru.spbau.mit.core.GUI;
 
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
@@ -22,8 +24,8 @@ public class TerminalGUI {
             terminal = new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
             screen.startScreen();
-            maxX = terminal.getTerminalSize().getRows();
-            maxY = terminal.getTerminalSize().getColumns();
+            maxX = screen.getTerminalSize().getRows();
+            maxY = screen.getTerminalSize().getColumns();
         }
     }
 
@@ -37,22 +39,22 @@ public class TerminalGUI {
 
     public static void addToTerminal(Drawable... items) throws IOException {
         for (Drawable item : items) {
-            terminal.setCursorPosition(item.getCurrentPosition());
-            terminal.putCharacter(item.getIcon());
+            screen.setCharacter(item.getCurrentPosition(),
+                    new TextCharacter(item.getIcon(), TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
         }
-        terminal.flush();
+        screen.refresh();
     }
 
     public static void removeFromTerminal(Drawable... items) throws IOException {
         for (Drawable item : items) {
-            terminal.setCursorPosition(item.getCurrentPosition());
-            terminal.putCharacter(' ');
+            screen.setCharacter(item.getCurrentPosition(),
+                    new TextCharacter(' ', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
         }
-        terminal.flush();
+        screen.refresh();
     }
 
     public static KeyStroke readInput() throws IOException {
-        return terminal.readInput();
+        return screen.readInput();
     }
 
     public static TextGraphics createNewScreen() throws IOException {
