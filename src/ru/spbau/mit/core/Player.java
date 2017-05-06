@@ -5,14 +5,13 @@ import ru.spbau.mit.core.items.Item;
 import java.util.ArrayList;
 
 public class Player extends Character {
-    private final Stats baseStats = Stats.DEFAULT_STATS;
-    private Stats currentStats = baseStats;
+    private static final Stats baseStats = new Stats(100, 100, 1);;
     private Inventory mInventory = new Inventory();
-//    private ArrayList<Item> mInventory = new ArrayList<>();
-    private ArrayList<Item> equippedItems;
+    private static final double FIGHT_COEFFICIENT = 0.01;
+    private ArrayList<Item> equippedItems = new ArrayList<>();
 
     public Player() {
-        super('Δ');
+        super('Δ', baseStats);
     }
 
     public void pickUp(Item item) {
@@ -25,6 +24,6 @@ public class Player extends Character {
 
     @Override
     public int getFightPower() {
-        return 0;
+        return (int) Math.round(getStats().getStamina() * FIGHT_COEFFICIENT);
     }
 }

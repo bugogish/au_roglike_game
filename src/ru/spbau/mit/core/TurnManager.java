@@ -2,6 +2,7 @@ package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.items.Item;
+import ru.spbau.mit.core.mobs.Mob;
 import ru.spbau.mit.utils.Direction;
 
 import java.io.IOException;
@@ -9,8 +10,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class TurnManager {
-    private TurnManager() {
-    }
+    private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
         Player player = mGameState.getPlayer();
@@ -19,7 +19,7 @@ public class TurnManager {
         player.fight(opponent);
 
         if (player.isDead()) {
-            System.exit(0);
+            mGameState.setGameOver(true);
         }
 
         if (opponent.isDead()) {

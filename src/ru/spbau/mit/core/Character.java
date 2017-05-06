@@ -7,11 +7,12 @@ import ru.spbau.mit.core.GUI.Drawable;
 
 import java.io.IOException;
 
-abstract class Character extends Drawable {
+public abstract class Character extends Drawable {
     private Stats currentStats;
 
-    public Character(char itemIcon) {
+    public Character(char itemIcon, Stats currentStats) {
         super(itemIcon, new TerminalPosition(0,0));
+        this.currentStats = currentStats;
     }
 
     // TODO : Check maybe move because mobs random walks generate OutOfBounds in Map's IsCellFree

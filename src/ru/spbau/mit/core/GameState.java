@@ -1,5 +1,8 @@
 package ru.spbau.mit.core;
+import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.GUI.Drawable;
+import ru.spbau.mit.core.mobs.Mob;
+import ru.spbau.mit.core.mobs.MobsFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -45,9 +48,11 @@ public class GameState {
 
     private void generateMobs() throws IOException {
         for (int i = 0; i < numberOfMobs; i++) {
-            Mob mob = new Mob();
-            mobs.add(mob);
+            Mob mob = MobsFactory.createRandomMob();
+            TerminalPosition position = currentMap.getFreeRandomPosition();
+            mob.setCurrentPosition(position);
             currentMap.occupyCell(mob.getCurrentPosition());
+            mobs.add(mob);
         }
 
         mobs.forEach(Drawable::draw);

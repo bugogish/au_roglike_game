@@ -50,7 +50,7 @@ public class Map {
         items.values().forEach(Drawable::draw);
     }
 
-    private TerminalPosition getFreeRandomPosition() {
+    public TerminalPosition getFreeRandomPosition() {
         Random rand = new Random();
         TerminalPosition position = new TerminalPosition(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
                 rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);

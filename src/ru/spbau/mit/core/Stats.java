@@ -2,7 +2,6 @@ package ru.spbau.mit.core;
 
 public class Stats {
     // TODO : Remove placeholder default stats
-    public static final Stats DEFAULT_STATS = new Stats(100, 100, 1);
     private int health;
     private int stamina;
     private int armor;
@@ -15,6 +14,14 @@ public class Stats {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public int getArmor() {
+        return armor;
     }
 
     public void decreaseHealth(int delta) {
