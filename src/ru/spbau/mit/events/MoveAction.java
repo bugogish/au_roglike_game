@@ -38,8 +38,9 @@ public class MoveAction implements Action {
             stepsLeft--;
         }
 
+
         // TODO : TURN FINISHED RETHINK
-        if (!gameState.isPlayersTurn()) {
+        if (stepsLeft <= 0) {
             refreshSteps();
             gameState.setPlayersTurn(false);
         }
