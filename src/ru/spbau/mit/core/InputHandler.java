@@ -20,8 +20,6 @@ public class InputHandler {
             switch (key.getKeyType()) {
                 case Escape: {
                     // TODO : THERE SHOULD BE END GAME SCREEN OR SMTH
-                    System.exit(0);
-                    // TODO : REPLACE BY BELOW v
                     return gameState -> gameState.setGameOver(true);
                 }
 
@@ -30,35 +28,21 @@ public class InputHandler {
                     if (pressedChar == ' ') {
                         return gameState -> gameState.setPlayersTurn(false);
                     } else if (pressedChar == 'i') {
-                        if (inventoryMode) {
-                            inventoryMode = false;
-                            return new CloseInventoryAction();
-                        } else {
-                            inventoryMode = true;
-                            return new OpenInventoryAction();
-                        }
+                        return new OpenInventoryAction();
                     }
                 }
 
                 case ArrowDown: {
-                    if (!inventoryMode) {
                         return new MoveAction(Direction.DOWN);
-                    }
                 }
                 case ArrowLeft: {
-                    if (!inventoryMode) {
                         return new MoveAction(Direction.LEFT);
-                    }
                 }
                 case ArrowRight: {
-                    if (!inventoryMode) {
                         return new MoveAction(Direction.RIGHT);
-                    }
                 }
                 case ArrowUp: {
-                    if (!inventoryMode) {
                         return new MoveAction(Direction.UP);
-                    }
                 }
                 default: {
                     return null;

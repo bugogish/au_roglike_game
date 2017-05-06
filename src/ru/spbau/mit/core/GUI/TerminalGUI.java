@@ -2,7 +2,7 @@ package ru.spbau.mit.core.GUI;
 
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -22,6 +22,7 @@ public class TerminalGUI {
     public static void initialize() throws IOException {
         if (terminal == null) {
             terminal = new DefaultTerminalFactory().createTerminal();
+            terminal.setCursorVisible(false);
             screen = new TerminalScreen(terminal);
             screen.startScreen();
             maxX = screen.getTerminalSize().getRows();
@@ -57,14 +58,8 @@ public class TerminalGUI {
         return screen.readInput();
     }
 
-    public static TextGraphics createNewScreen() throws IOException {
-        Screen screen = new TerminalScreen(terminal);
-        screen.startScreen();
-        return screen.newTextGraphics();
-    }
-
-    public static void closeNewScreen() throws IOException {
-        screen.startScreen();
+    public static MultiWindowTextGUI createNewScreen() throws IOException {
+        return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
 }
 
