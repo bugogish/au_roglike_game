@@ -1,7 +1,6 @@
-package ru.spbau.mit.utils;
+package ru.spbau.mit.core.GUI;
 
 import com.googlecode.lanterna.TerminalPosition;
-import ru.spbau.mit.core.GUI;
 
 import java.io.IOException;
 
@@ -24,20 +23,20 @@ public abstract class Drawable {
 
     public void draw() {
         try {
-            GUI.addToTerminal(this);
+            TerminalGUI.addToTerminal(this);
         } catch (IOException e) {
             //TODO : WHERE AND HOW PROCESS THIS EXCEPTION
         }
     }
 
     public void redrawTo(TerminalPosition position) throws IOException {
-        GUI.removeFromTerminal(this);
+        TerminalGUI.removeFromTerminal(this);
         this.current = position;
-        GUI.addToTerminal(this);
+        TerminalGUI.addToTerminal(this);
     }
 
     public void clear() throws IOException {
-        GUI.removeFromTerminal(this);
+        TerminalGUI.removeFromTerminal(this);
     }
 
     public char getIcon() {

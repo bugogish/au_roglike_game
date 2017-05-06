@@ -1,6 +1,7 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
+import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.utils.Direction;
 
 import java.io.IOException;

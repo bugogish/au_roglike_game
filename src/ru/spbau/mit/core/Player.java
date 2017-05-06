@@ -1,9 +1,11 @@
 package ru.spbau.mit.core;
 
+import ru.spbau.mit.core.items.Item;
+
 import java.util.ArrayList;
 
 public class Player extends Character {
-    private final Stats baseStats = new Stats();
+    private final Stats baseStats = Stats.DEFAULT_STATS;
     private Stats currentStats = baseStats;
     private Inventory mInventory = new Inventory();
 //    private ArrayList<Item> mInventory = new ArrayList<>();

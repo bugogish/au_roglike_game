@@ -1,5 +1,5 @@
 package ru.spbau.mit.core;
-import ru.spbau.mit.utils.Drawable;
+import ru.spbau.mit.core.GUI.Drawable;
 
 import java.io.IOException;
 import java.util.*;
@@ -14,7 +14,7 @@ public class GameState {
     private boolean gameOver = false;
 
 
-    // GAME SETTINGS (Maybe create a Settings class or function to set parameters for different difficulty levels)
+    // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
     public final static int maxTurnSteps = 5;
     public final static int numberOfObstacles = 20;
     public final static int numberOfMobs = 10;

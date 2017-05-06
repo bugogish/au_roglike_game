@@ -1,7 +1,11 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
-import ru.spbau.mit.utils.Drawable;
+import ru.spbau.mit.core.GUI.TerminalGUI;
+import ru.spbau.mit.core.items.Item;
+import ru.spbau.mit.core.GUI.Drawable;
+import ru.spbau.mit.core.items.ItemFactory;
+import ru.spbau.mit.core.items.ItemType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,15 +24,16 @@ public class Map {
 
         while (obstacles.size() < GameState.numberOfObstacles) {
             // TODO : transform this into condition when obstacle cant be generated at player's position
-            TerminalPosition obsPos = new TerminalPosition(rand.nextInt(GUI.getMaxColumn() - 1) + 1,
-                    rand.nextInt(GUI.getMaxRow() - 1) + 1);
+            TerminalPosition obsPos = new TerminalPosition(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
+                    rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
             obstacles.add(new Drawable(obstacleSymbol, obsPos) {});
         }
 
         obstacles.forEach(Drawable::draw);
 
         while (items.size() < GameState.numberOfItems) {
-            Item item = new Item("SWORD", "SWORDEST SWORD", new Stats());
+            ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
+            Item item = ItemFactory.createItem(randomType);
             items.put(item.getCurrentPosition(), item);
         }
 
