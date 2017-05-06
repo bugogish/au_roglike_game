@@ -1,7 +1,9 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.gui2.dialogs.ActionListDialogBuilder;
 import com.googlecode.lanterna.gui2.table.Table;
+import com.googlecode.lanterna.terminal.Terminal;
 import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.GUI.Drawable;
@@ -41,29 +43,29 @@ public class Inventory extends Drawable {
 //
 //        }
 
-//        try {
-//            ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(TITLE);
-//
-//            if (items.isEmpty()) {
-//                ab.addAction("<Empty>", () -> {});
-//            } else {
-//                for (Item item : items) {
-//                    ab.addAction(item.getItemName(), () -> {
-//                        // TODO : here needs to be equip ation
-//                    });
-//                }
-//            }
-//
-//            ab.build().showDialog(TerminalGUI.createNewScreen());
-//        } catch (IOException e) {
-//            // TODO : Exception Handling!
-//            e.printStackTrace();
-//        }
+        try {
+            ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(TITLE);
+
+            if (items.isEmpty()) {
+                ab.addAction("<Empty>", () -> {});
+            } else {
+                for (Item item : items) {
+                    ab.addAction(item.getItemName(), () -> {
+                        // TODO : here needs to be equip ation
+                    });
+                }
+            }
+
+            ab.build().showDialog(TerminalGUI.createNewScreen());
+        } catch (IOException e) {
+            // TODO : Exception Handling!
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void clear() throws IOException {
-        TerminalGUI.closeNewScreen();
+
     }
 
     @Override

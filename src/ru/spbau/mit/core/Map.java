@@ -62,6 +62,11 @@ public class Map {
         return position;
     }
 
+    public void reDrawContents() {
+        obstacles.forEach(Drawable::draw);
+        items.values().forEach(Drawable::draw);
+    }
+
     public boolean intersectsWithObstacle(TerminalPosition position) {
         return obstacles.stream().anyMatch(obs -> obs.getCurrentPosition().equals(position));
     }
