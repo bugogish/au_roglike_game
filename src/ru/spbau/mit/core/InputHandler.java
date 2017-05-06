@@ -9,7 +9,7 @@ import ru.spbau.mit.utils.Direction;
 import java.io.IOException;
 
 public class InputHandler {
-    private static boolean inventoryMode = false;
+    private InputHandler() {}
 
     public static Action handleInput() throws IOException {
         KeyStroke key = TerminalGUI.readInput();
@@ -45,12 +45,12 @@ public class InputHandler {
                         return new MoveAction(Direction.UP);
                 }
                 default: {
-                    return null;
+                    return gameState -> {};
                 }
             }
         }
 
-        return null;
+        return gameState -> {};
     }
 
 }
