@@ -1,8 +1,9 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
+import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.utils.Direction;
-import ru.spbau.mit.utils.Drawable;
+import ru.spbau.mit.core.GUI.Drawable;
 
 import java.io.IOException;
 
@@ -25,7 +26,7 @@ abstract class Character extends Drawable {
             }
 
             case RIGHT: {
-                if (newPosition.getColumn() <= GUI.getMaxColumn()) {
+                if (newPosition.getColumn() <= TerminalGUI.getMaxColumn()) {
                     newPosition = newPosition.withColumn(newPosition.getColumn() + 1);
                 }
                 break;
@@ -39,7 +40,7 @@ abstract class Character extends Drawable {
             }
 
             case DOWN: {
-                if (newPosition.getRow() <= GUI.getMaxRow()) {
+                if (newPosition.getRow() <= TerminalGUI.getMaxRow()) {
                     newPosition = newPosition.withRow(newPosition.getRow() + 1);
                 }
                 break;

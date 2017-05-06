@@ -1,15 +1,11 @@
 package ru.spbau.mit.core;
 
 public class Stats {
+    // TODO : Remove placeholder default stats
+    public static final Stats DEFAULT_STATS = new Stats(100, 100, 1);
     private int health;
     private int stamina;
     private int armor;
-
-    public Stats() {
-        health = 100;
-        stamina = 100;
-        armor = 1;
-    }
 
     public Stats(int health, int stamina, int armor) {
         this.health = health;

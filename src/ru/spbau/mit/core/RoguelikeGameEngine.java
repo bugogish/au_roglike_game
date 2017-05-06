@@ -1,5 +1,7 @@
 package ru.spbau.mit.core;
 
+import ru.spbau.mit.core.GUI.TerminalGUI;
+
 import java.io.IOException;
 
 public class RoguelikeGameEngine {
@@ -13,7 +15,7 @@ public class RoguelikeGameEngine {
     }
 
     private void initialize() throws IOException {
-        GUI.createTerminal();
+        TerminalGUI.initialize();
         mGameState = new GameState();
     }
 
