@@ -16,12 +16,6 @@ public abstract class Item extends Drawable {
     public Item(String name, String description, Stats changeToStats, char itemIcon) {
         super(itemIcon, new TerminalPosition(0, 0));
 
-        // TODO : Maybe they should be generated on map and be checked for intersection with obstacles
-        Random rand = new Random();
-        TerminalPosition pos = new TerminalPosition(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
-                rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
-        setCurrentPosition(pos);
-
         itemName = name;
         this.description = description;
         this.changeToStats = changeToStats;

@@ -57,7 +57,7 @@ public class GameState {
     }
 
     public Optional<Mob> getAttackingMob() {
-        return mobs.stream().filter(mob -> mob.getCurrentPosition() == player.getCurrentPosition()).findFirst();
+        return mobs.stream().filter(mob -> mob.getCurrentPosition().equals(player.getCurrentPosition())).findAny();
     }
 
     public Player getPlayer() {
