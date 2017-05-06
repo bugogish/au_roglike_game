@@ -15,8 +15,6 @@ public abstract class Character extends Drawable {
         this.currentStats = currentStats;
     }
 
-    // TODO : Check maybe move because mobs random walks generate OutOfBounds in Map's IsCellFree
-
     public TerminalPosition maybeMove(Direction direction) throws IOException {
         TerminalPosition newPosition = getCurrentPosition();
 

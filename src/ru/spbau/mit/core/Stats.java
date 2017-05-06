@@ -28,12 +28,15 @@ public class Stats {
         health -= delta;
     }
 
+    public void subtractStats(Stats another) {
+        this.health -= another.health;
+        this.stamina -= another.stamina;
+        this.armor -= another.armor;
+    }
+
     public void addStats(Stats another) {
         this.health += another.health;
         this.stamina += another.stamina;
         this.armor += another.armor;
-//        return new Stats(this.health + another.health,
-//                        this.stamina + another.stamina,
-//                        this.armor + another.armor);
     }
 }

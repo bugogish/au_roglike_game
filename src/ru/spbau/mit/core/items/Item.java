@@ -24,4 +24,8 @@ public abstract class Item extends Drawable {
     public String getItemName() {
         return itemName;
     }
+
+    public Stats getStats() {
+        return changeToStats;
+    }
 }
