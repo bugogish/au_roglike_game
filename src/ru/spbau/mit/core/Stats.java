@@ -17,6 +17,10 @@ public class Stats {
         return health;
     }
 
+    public void decreaseHealth(int delta) {
+        health -= delta;
+    }
+
     public void addStats(Stats another) {
         this.health += another.health;
         this.stamina += another.stamina;
@@ -24,9 +28,5 @@ public class Stats {
 //        return new Stats(this.health + another.health,
 //                        this.stamina + another.stamina,
 //                        this.armor + another.armor);
-    }
-
-    public void decreaseHealth(int delta) {
-        health -= delta;
     }
 }

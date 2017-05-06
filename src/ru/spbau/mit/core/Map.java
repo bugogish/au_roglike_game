@@ -33,7 +33,7 @@ public class Map {
 
         while (items.size() < GameState.numberOfItems) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
-            Item item = ItemFactory.createItem(randomType);
+            Item item = ItemFactory.createDefaultItem(randomType);
             items.put(item.getCurrentPosition(), item);
         }
 
@@ -41,7 +41,7 @@ public class Map {
     }
 
     public boolean intersectsWithObstacle(TerminalPosition position) {
-        return obstacles.contains(new Drawable(obstacleSymbol, position) {});
+        return obstacles.stream().anyMatch(obs -> obs.getCurrentPosition().equals(position));
     }
 
     public boolean intersectsWithItem(TerminalPosition position) {
