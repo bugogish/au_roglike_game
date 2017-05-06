@@ -12,65 +12,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventory extends Drawable {
-    private static final String TITLE = "Inventory";
+public class Inventory {
+    public static final String TITLE = "Inventory";
     private ArrayList<Item> items = new ArrayList<>();
-
-    public Inventory() {
-        super('i', new TerminalPosition(0, 0));
-    }
 
     public void add(Item item) {
         items.add(item);
     }
 
-    @Override
-    public void draw() {
-//        Table<String> table = new Table<>("Items");
-//        for (Item item : items) {
-//            table.getTableModel().addRow(item.getItemName());
-//        }
-//
-//        table.setSelectAction(() -> {
-//            List<String> data = table.getTableModel().getRow(table.getSelectedRow());
-//            for (String aData : data) {
-//                System.out.println(aData);
-//            }
-//        });
-//        try {
-//            table.draw(TerminalGUI.createNewScreen());
-//        } catch (IOException e) {
-//
-//        }
-
-        try {
-            ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(TITLE);
-
-            if (items.isEmpty()) {
-                ab.addAction("<Empty>", () -> {});
-            } else {
-                for (Item item : items) {
-                    ab.addAction(item.getItemName(), () -> {
-
-                        // TODO : here needs to be equip action
-                    });
-                }
-            }
-
-            ab.build().showDialog(TerminalGUI.createNewScreen());
-        } catch (IOException e) {
-            // TODO : Exception Handling!
-            e.printStackTrace();
-        }
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
-    @Override
-    public void clear() throws IOException {
-
-    }
-
-    @Override
-    public void redrawTo(TerminalPosition position) throws IOException {
-        super.redrawTo(position);
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
 }
