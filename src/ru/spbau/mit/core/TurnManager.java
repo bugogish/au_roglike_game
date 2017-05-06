@@ -53,6 +53,7 @@ public class TurnManager {
             Direction direction = Direction.values()[random.nextInt(4)];
             TerminalPosition newPosition = mob.maybeMove(direction);
 
+            // TODO : fix bug that Mob can delete an obstacle (check Drawable comparing!!!)
             while (map.intersectsWithObstacle(newPosition) || map.intersectsWithItem(newPosition)) {
                 direction = Direction.values()[random.nextInt(4)];
                 newPosition = mob.maybeMove(direction);
