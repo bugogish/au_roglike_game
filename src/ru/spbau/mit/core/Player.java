@@ -11,10 +11,8 @@ public class Player extends Character {
     private static final Stats baseStats = new Stats(100, 100, 1);;
     private Inventory mInventory = new Inventory();
     private static final double ARMOR_POWER_DECREASE = 0.2;
-    private ArrayList<Item> equippedItems = new ArrayList<>();
     private Item weaponEquipped;
     private Item defenceEquipped;
-    private static final double FIGHT_COEFFICIENT = 0.01;
 
     public Player() {
         super(DEFAULT_ICON, baseStats);
@@ -29,9 +27,12 @@ public class Player extends Character {
     }
 
     public void equipItem(Item item) {
+        // TODO : Check if hands were empty
+
         if (item instanceof Dagger) {
             weaponEquipped = item;
         }
+
         if (item instanceof Shield) {
             defenceEquipped = item;
         }
