@@ -55,11 +55,12 @@ public class TurnManager {
             TerminalPosition newPosition = mob.maybeMove(direction);
 
             // TODO : fix bug that Mob can delete an obstacle (check Drawable comparing!!!)
-            while (map.intersectsWithObstacle(newPosition) || map.intersectsWithItem(newPosition)) {
+            while (!map.isCellFree(newPosition)) {
                 direction = Direction.values()[random.nextInt(4)];
                 newPosition = mob.maybeMove(direction);
             }
-
+            map.freeCell(mob.getCurrentPosition());
+            map.occupyCell(newPosition);
             mob.redrawTo(newPosition);
         }
     }
