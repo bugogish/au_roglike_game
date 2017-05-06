@@ -83,6 +83,7 @@ public class Map {
         return cells[position.getRow()][position.getColumn()];
     }
 
+    // TODO : this being public looks ugly
     public void occupyCell(TerminalPosition position) {
         if (!cells[position.getRow()][position.getColumn()]) {
             System.out.println("Cell has been already occupied");
@@ -93,7 +94,12 @@ public class Map {
         cells[position.getRow()][position.getColumn()] = false;
     }
 
-    public void freeCell(TerminalPosition position) {
+    private void freeCell(TerminalPosition position) {
         cells[position.getRow()][position.getColumn()] = true;
+    }
+
+    public void replace(TerminalPosition from, TerminalPosition to) {
+        freeCell(from);
+        occupyCell(to);
     }
 }

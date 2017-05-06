@@ -59,8 +59,8 @@ public class TurnManager {
                 direction = Direction.values()[random.nextInt(4)];
                 newPosition = mob.maybeMove(direction);
             }
-            map.freeCell(mob.getCurrentPosition());
-            map.occupyCell(newPosition);
+
+            map.replace(mob.getCurrentPosition(), newPosition);
             mob.redrawTo(newPosition);
         }
     }
