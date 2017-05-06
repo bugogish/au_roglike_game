@@ -10,7 +10,7 @@ import ru.spbau.mit.core.items.Item;
 import java.io.IOException;
 
 public class OpenInventoryAction implements Action{
-    GameState gameState;
+    private GameState gameState;
 
     @Override
     public void doAction(GameState gameState) throws IOException {
