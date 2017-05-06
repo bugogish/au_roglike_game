@@ -1,8 +1,9 @@
 package ru.spbau.mit.core;
-import com.googlecode.lanterna.TerminalPosition;
+
 import ru.spbau.mit.core.GUI.Drawable;
 import ru.spbau.mit.core.mobs.Mob;
 import ru.spbau.mit.core.mobs.MobsFactory;
+import ru.spbau.mit.utils.Cell;
 
 import java.io.IOException;
 import java.util.*;
@@ -16,9 +17,8 @@ public class GameState {
     private boolean playersTurn = false;
     private boolean gameOver = false;
 
-
     // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
-    public final static int maxTurnSteps = 5;
+    public final static int maxTurnSteps = 1;
     public final static int numberOfObstacles = 20;
     public final static int numberOfMobs = 10;
     public final static int numberOfItems = 7;
@@ -49,7 +49,7 @@ public class GameState {
     private void generateMobs() throws IOException {
         for (int i = 0; i < numberOfMobs; i++) {
             Mob mob = MobsFactory.createRandomMob();
-            TerminalPosition position = currentMap.getFreeRandomPosition();
+            Cell position = currentMap.getFreeRandomPosition();
             mob.setCurrentPosition(position);
             currentMap.occupyCell(mob.getCurrentPosition());
             mobs.add(mob);
@@ -80,8 +80,7 @@ public class GameState {
     }
 
     public void killMob(Mob toBeKilled) {
-        System.out.println("Mobs size " + mobs.size());
         mobs.remove(toBeKilled);
-        System.out.println("Mobs size " + mobs.size());
+        currentMap.freeCell(toBeKilled.getCurrentPosition());
     }
 }

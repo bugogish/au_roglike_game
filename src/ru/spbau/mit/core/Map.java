@@ -1,11 +1,11 @@
 package ru.spbau.mit.core;
 
-import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.GUI.Drawable;
 import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.items.ItemFactory;
 import ru.spbau.mit.core.items.ItemType;
+import ru.spbau.mit.utils.Cell;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,10 +14,10 @@ import java.util.Set;
 
 public class Map {
     private Set<Drawable> obstacles = new HashSet<>();
-    private HashMap<TerminalPosition, Item> items = new HashMap<>();
+    //    private int obstaclesNum = 20;
+    private static final char obstacleSymbol = '▣';
+    private HashMap<Cell, Item> items = new HashMap<>();
     private boolean [][] cells = new boolean[TerminalGUI.getMaxRow()][TerminalGUI.getMaxColumn()];
-//    private int obstaclesNum = 20;
-    private char obstacleSymbol = '▣';
 
     public Map() {
         for (int i = 0; i < TerminalGUI.getMaxRow(); i++) {
@@ -33,7 +33,7 @@ public class Map {
         Random rand = new Random();
 
         while (obstacles.size() < GameState.numberOfObstacles) {
-            TerminalPosition position = getFreeRandomPosition();
+            Cell position = getFreeRandomPosition();
             obstacles.add(new Drawable(obstacleSymbol, position) {});
             occupyCell(position);
         }
@@ -43,7 +43,8 @@ public class Map {
         while (items.size() < GameState.numberOfItems) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
             Item item = ItemFactory.createDefaultItem(randomType);
-            TerminalPosition position = getFreeRandomPosition();
+            Cell position = getFreeRandomPosition();
+
             item.setCurrentPosition(position);
             occupyCell(position);
             items.put(position, item);
@@ -52,12 +53,12 @@ public class Map {
         items.values().forEach(Drawable::draw);
     }
 
-    public TerminalPosition getFreeRandomPosition() {
+    public Cell getFreeRandomPosition() {
         Random rand = new Random();
-        TerminalPosition position = new TerminalPosition(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
+        Cell position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
                 rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
         while(!isCellFree(position)) {
-            position = new TerminalPosition(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
+            position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
                     rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
         }
 
@@ -69,26 +70,26 @@ public class Map {
         items.values().forEach(Drawable::draw);
     }
 
-    public boolean intersectsWithObstacle(TerminalPosition position) {
+    public boolean intersectsWithObstacle(Cell position) {
         return obstacles.stream().anyMatch(obs -> obs.getCurrentPosition().equals(position));
     }
 
-    public boolean intersectsWithItem(TerminalPosition position) {
+    public boolean intersectsWithItem(Cell position) {
         return items.get(position) != null;
     }
 
-    public Item removeItemOnPosition(TerminalPosition position) {
+    public Item removeItemOnPosition(Cell position) {
         Item item = items.get(position);
         items.remove(position);
         return item;
     }
 
-    public boolean isCellFree(TerminalPosition position) {
+    public boolean isCellFree(Cell position) {
         return cells[position.getRow()][position.getColumn()];
     }
 
     // TODO : this being public looks ugly
-    public void occupyCell(TerminalPosition position) {
+    public void occupyCell(Cell position) {
         if (!cells[position.getRow()][position.getColumn()]) {
             System.out.println("Cell has been already occupied");
 //            throw new Exception("Trying to occupy an occupied cell");
@@ -98,11 +99,12 @@ public class Map {
         cells[position.getRow()][position.getColumn()] = false;
     }
 
-    private void freeCell(TerminalPosition position) {
+    // TODO : NEEDS REFACTORING !!
+    public void freeCell(Cell position) {
         cells[position.getRow()][position.getColumn()] = true;
     }
 
-    public void replace(TerminalPosition from, TerminalPosition to) {
+    public void replace(Cell from, Cell to) {
         freeCell(from);
         occupyCell(to);
     }

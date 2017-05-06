@@ -4,16 +4,13 @@ import ru.spbau.mit.core.items.Dagger;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.items.Shield;
 
-import java.util.ArrayList;
-
 public class Player extends Character {
-    private static final char DEFAULT_ICON = 'Δ';
+    private static final char DEFAULT_ICON = '⛹';
     private static final Stats baseStats = new Stats(100, 100, 1);
-    private Inventory mInventory = new Inventory();
     private static final double ARMOR_POWER_DECREASE = 0.2;
+    private Inventory mInventory = new Inventory();
     private Item weaponEquipped = null;
     private Item defenceEquipped = null;
-    private static final double FIGHT_COEFFICIENT = 0.01;
 
     public Player() {
         super(DEFAULT_ICON, baseStats);
@@ -31,17 +28,21 @@ public class Player extends Character {
         if (item instanceof Dagger) {
             if (weaponEquipped != null) {
                 getStats().subtractStats(weaponEquipped.getStats());
+                weaponEquipped.setEquipped(false);
             }
             getStats().addStats(item.getStats());
             weaponEquipped = item;
+            weaponEquipped.setEquipped(true);
         }
 
         if (item instanceof Shield) {
             if (defenceEquipped != null) {
                 getStats().subtractStats(defenceEquipped.getStats());
+                defenceEquipped.setEquipped(false);
             }
             getStats().addStats(item.getStats());
             defenceEquipped = item;
+            defenceEquipped.setEquipped(true);
         }
     }
 

@@ -25,17 +25,17 @@ public class OpenInventoryAction implements Action{
         gameState.getCurrentMap().reDrawContents();
     }
 
-    private void openInventoryView() throws IOException {
+    private void openInventoryView() {
         ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(Inventory.TITLE);
 
         if (gameState.getPlayer().getInventory().isEmpty()) {
             ab.addAction("<Empty>", () -> {});
         } else {
             for (Item item : gameState.getPlayer().getInventory().getItems()) {
-                ab.addAction(item.getItemName(), () -> {
-                    gameState.getPlayer().equipItem(item);
-                    // TODO : here needs to be equip action
-                });
+                ab.addAction(
+                        String.valueOf(item.getIcon()).concat(item.isEquipped() ? "  [Equipped]" : ""),
+                        () -> gameState.getPlayer().equipItem(item)
+                );
             }
         }
 

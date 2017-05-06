@@ -8,6 +8,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -58,7 +59,8 @@ public class TerminalGUI {
         return screen.readInput();
     }
 
-    public static MultiWindowTextGUI createNewScreen() throws IOException {
+    @NotNull
+    public static MultiWindowTextGUI createNewScreen() {
         return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
 

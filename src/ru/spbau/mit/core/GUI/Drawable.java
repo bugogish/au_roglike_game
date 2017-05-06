@@ -1,24 +1,24 @@
 package ru.spbau.mit.core.GUI;
 
-import com.googlecode.lanterna.TerminalPosition;
+import ru.spbau.mit.utils.Cell;
 
 import java.io.IOException;
 
 public abstract class Drawable {
-    private TerminalPosition current;
+    private Cell currentPosition;
     private final char icon;
 
-    public Drawable(char icon, TerminalPosition current) {
+    public Drawable(char icon, Cell currentPosition) {
         this.icon = icon;
-        this.current = current;
+        this.currentPosition = currentPosition;
     }
 
-    public TerminalPosition getCurrentPosition() {
-        return current;
+    public Cell getCurrentPosition() {
+        return currentPosition;
     }
 
-    public void setCurrentPosition(TerminalPosition current) {
-        this.current = current;
+    public void setCurrentPosition(Cell current) {
+        this.currentPosition = current;
     }
 
     public void draw() {
@@ -29,9 +29,9 @@ public abstract class Drawable {
         }
     }
 
-    public void redrawTo(TerminalPosition position) throws IOException {
+    public void redrawTo(Cell position) throws IOException {
         TerminalGUI.removeFromTerminal(this);
-        this.current = position;
+        this.currentPosition = position;
         TerminalGUI.addToTerminal(this);
     }
 

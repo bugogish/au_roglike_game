@@ -3,6 +3,7 @@ package ru.spbau.mit.events;
 import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Player;
+import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class MoveAction implements Action {
         this.direction = direction;
     }
 
-    private boolean isStepAllowed(TerminalPosition newPosition) {
+    private boolean isStepAllowed(Cell newPosition) {
         return stepsLeft > 0 &&
                 !gameState.getCurrentMap().intersectsWithObstacle(newPosition) &&
                 !newPosition.equals(gameState.getPlayer().getCurrentPosition());
@@ -30,7 +31,7 @@ public class MoveAction implements Action {
     public void doAction(GameState gameState) throws IOException {
         Player player = gameState.getPlayer();
         this.gameState = gameState;
-        TerminalPosition newPosition = player.maybeMove(direction);
+        Cell newPosition = player.maybeMove(direction);
 
         if (isStepAllowed(newPosition)) {
             gameState.getCurrentMap().replace(player.getCurrentPosition(), newPosition);
@@ -43,5 +44,4 @@ public class MoveAction implements Action {
             gameState.setPlayersTurn(false);
         }
     }
-
 }

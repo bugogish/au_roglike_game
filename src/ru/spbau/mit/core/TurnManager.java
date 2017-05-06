@@ -1,8 +1,8 @@
 package ru.spbau.mit.core;
 
-import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.mobs.Mob;
+import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
 import java.io.IOException;
@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.Set;
 
 public class TurnManager {
+    // TODO : This is a field for mob AI
+    private static final int chaseRadius = 10;
     private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
@@ -26,7 +28,6 @@ public class TurnManager {
         if (opponent.isDead()) {
             System.out.println("Mob is dead!");
             mGameState.killMob(opponent);
-            opponent.clear();
         }
     }
 
@@ -48,25 +49,81 @@ public class TurnManager {
         }
     }
 
+    private static boolean isInTargetsRadius(Cell object, Cell target) {
+        return Math.abs(object.getRow() - target.getRow()) < chaseRadius ||
+                Math.abs(object.getColumn() - target.getColumn()) < chaseRadius;
+    }
+
+    private static Cell moveRandom(Mob mob, GameState gameState) throws IOException {
+        Random random = new Random();
+        Direction direction = Direction.values()[random.nextInt(4)];
+        Cell position = mob.maybeMove(direction);
+
+        while (!gameState.getCurrentMap().isCellFree(position)) {
+            direction = Direction.values()[random.nextInt(4)];
+            position = mob.maybeMove(direction);
+        }
+
+        return position;
+    }
+
+    // TODO : THIS NEEDS TO BE REDONE
+    private static Cell moveToTarget(Mob mob, GameState gameState, Cell target) throws IOException {
+        Cell position = mob.getCurrentPosition();
+        Cell newPosition = position;
+        int horizontalDist = position.getRow() - target.getRow();
+        int verticalDist = position.getColumn() - target.getColumn();
+
+        if (Math.abs(horizontalDist) < Math.abs(verticalDist)) {
+            if (horizontalDist < 0) {
+                newPosition = mob.maybeMove(Direction.RIGHT);
+            } else if (horizontalDist > 0) {
+                newPosition = mob.maybeMove(Direction.LEFT);
+            }
+
+            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
+                if (verticalDist < 0) {
+                    newPosition = mob.maybeMove(Direction.DOWN);
+                } else {
+                    newPosition = mob.maybeMove(Direction.UP);
+                }
+            }
+        } else {
+            if (verticalDist < 0) {
+                newPosition = mob.maybeMove(Direction.DOWN);
+            } else {
+                newPosition = mob.maybeMove(Direction.UP);
+            }
+            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
+                if (horizontalDist < 0) {
+                    newPosition = mob.maybeMove(Direction.RIGHT);
+                } else if (horizontalDist > 0) {
+                    newPosition = mob.maybeMove(Direction.LEFT);
+                }
+            }
+        }
+
+
+        return newPosition;
+    }
 
     // TODO : Don't know where to put this random walk
 
     private static void moveMobs(GameState gameState) throws IOException {
-        Random random = new Random();
+        Cell target = gameState.getPlayer().getCurrentPosition();
         Set<Mob> mobs = gameState.getMobs();
         Map map = gameState.getCurrentMap();
 
         for (Mob mob : mobs) {
-            Direction direction = Direction.values()[random.nextInt(4)];
-            TerminalPosition newPosition = mob.maybeMove(direction);
-
-            while (!map.isCellFree(newPosition)) {
-                direction = Direction.values()[random.nextInt(4)];
-                newPosition = mob.maybeMove(direction);
+            Cell position;
+            if (isInTargetsRadius(mob.getCurrentPosition(), target)) {
+                position = moveToTarget(mob, gameState, target);
+            } else {
+                position = moveRandom(mob, gameState);
             }
 
-            map.replace(mob.getCurrentPosition(), newPosition);
-            mob.redrawTo(newPosition);
+            map.replace(mob.getCurrentPosition(), position);
+            mob.redrawTo(position);
         }
     }
 
