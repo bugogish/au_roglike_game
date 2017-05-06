@@ -22,7 +22,7 @@ public class GameState {
 
 
     public GameState() throws IOException {
-        currentMap.generate();
+        currentMap.occupyCell(player.getCurrentPosition());
         player.draw();
         generateMobs();
     }
@@ -47,6 +47,7 @@ public class GameState {
         for (int i = 0; i < numberOfMobs; i++) {
             Mob mob = new Mob();
             mobs.add(mob);
+            currentMap.occupyCell(mob.getCurrentPosition());
         }
 
         mobs.forEach(Drawable::draw);

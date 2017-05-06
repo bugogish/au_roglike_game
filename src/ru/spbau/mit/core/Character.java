@@ -14,6 +14,8 @@ abstract class Character extends Drawable {
         super(itemIcon, new TerminalPosition(0,0));
     }
 
+    // TODO : Check maybe move because mobs random walks generate OutOfBounds in Map's IsCellFree
+
     public TerminalPosition maybeMove(Direction direction) throws IOException {
         TerminalPosition newPosition = getCurrentPosition();
 
@@ -64,5 +66,4 @@ abstract class Character extends Drawable {
         currentStats.decreaseHealth(another.getFightPower());
         another.getStats().decreaseHealth(getFightPower());
     }
-
 }

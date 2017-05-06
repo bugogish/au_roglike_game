@@ -33,6 +33,8 @@ public class MoveAction implements Action {
         TerminalPosition newPosition = player.maybeMove(direction);
 
         if (isStepAllowed(newPosition)) {
+            gameState.getCurrentMap().freeCell(player.getCurrentPosition());
+            gameState.getCurrentMap().occupyCell(newPosition);
             player.redrawTo(newPosition);
             stepsLeft--;
         }
