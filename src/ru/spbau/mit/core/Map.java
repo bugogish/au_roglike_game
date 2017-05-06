@@ -81,6 +81,10 @@ public class Map {
         return item;
     }
 
+    public Item getItemOnPosition(TerminalPosition position) {
+        return items.get(position);
+    }
+
     public boolean isCellFree(TerminalPosition position) {
         return cells[position.getRow()][position.getColumn()];
     }
