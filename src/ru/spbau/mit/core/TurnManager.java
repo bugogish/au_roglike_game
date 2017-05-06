@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class TurnManager {
     // TODO : This is a field for mob AI
-    private static final int chaseRadius = 10;
+    private static final int chaseRadius = 7;
     private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
@@ -50,7 +50,7 @@ public class TurnManager {
     }
 
     private static boolean isInTargetsRadius(Cell object, Cell target) {
-        return Math.abs(object.getRow() - target.getRow()) < chaseRadius ||
+        return Math.abs(object.getRow() - target.getRow()) < chaseRadius &&
                 Math.abs(object.getColumn() - target.getColumn()) < chaseRadius;
     }
 
@@ -71,33 +71,33 @@ public class TurnManager {
     private static Cell moveToTarget(Mob mob, GameState gameState, Cell target) throws IOException {
         Cell position = mob.getCurrentPosition();
         Cell newPosition = position;
-        int horizontalDist = position.getRow() - target.getRow();
-        int verticalDist = position.getColumn() - target.getColumn();
+        int rowDist = position.getRow() - target.getRow();
+        int columnDist = position.getColumn() - target.getColumn();
 
-        if (Math.abs(horizontalDist) < Math.abs(verticalDist)) {
-            if (horizontalDist < 0) {
+        if (Math.abs(rowDist) < Math.abs(columnDist)) {
+            if (rowDist < 0) {
                 newPosition = mob.maybeMove(Direction.RIGHT);
-            } else if (horizontalDist > 0) {
+            } else if (rowDist > 0) {
                 newPosition = mob.maybeMove(Direction.LEFT);
             }
 
             if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-                if (verticalDist < 0) {
+                if (columnDist < 0) {
                     newPosition = mob.maybeMove(Direction.DOWN);
                 } else {
                     newPosition = mob.maybeMove(Direction.UP);
                 }
             }
         } else {
-            if (verticalDist < 0) {
+            if (columnDist < 0) {
                 newPosition = mob.maybeMove(Direction.DOWN);
             } else {
                 newPosition = mob.maybeMove(Direction.UP);
             }
             if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-                if (horizontalDist < 0) {
+                if (rowDist < 0) {
                     newPosition = mob.maybeMove(Direction.RIGHT);
-                } else if (horizontalDist > 0) {
+                } else if (rowDist > 0) {
                     newPosition = mob.maybeMove(Direction.LEFT);
                 }
             }
@@ -117,6 +117,7 @@ public class TurnManager {
         for (Mob mob : mobs) {
             Cell position;
             if (isInTargetsRadius(mob.getCurrentPosition(), target)) {
+                // TODO : Mob still can eat an obstacle (fix it)
                 position = moveToTarget(mob, gameState, target);
             } else {
                 position = moveRandom(mob, gameState);
