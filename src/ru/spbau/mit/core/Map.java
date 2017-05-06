@@ -1,14 +1,16 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
+import ru.spbau.mit.core.GUI.Drawable;
 import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.items.Item;
-import ru.spbau.mit.core.GUI.Drawable;
 import ru.spbau.mit.core.items.ItemFactory;
 import ru.spbau.mit.core.items.ItemType;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class Map {
     private Set<Drawable> obstacles = new HashSet<>();
@@ -79,10 +81,6 @@ public class Map {
         Item item = items.get(position);
         items.remove(position);
         return item;
-    }
-
-    public Item getItemOnPosition(TerminalPosition position) {
-        return items.get(position);
     }
 
     public boolean isCellFree(TerminalPosition position) {

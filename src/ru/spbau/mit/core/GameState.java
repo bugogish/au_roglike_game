@@ -78,4 +78,10 @@ public class GameState {
     public Set<Mob> getMobs() {
         return mobs;
     }
+
+    public void killMob(Mob toBeKilled) {
+        System.out.println("Mobs size " + mobs.size());
+        mobs.remove(toBeKilled);
+        System.out.println("Mobs size " + mobs.size());
+    }
 }

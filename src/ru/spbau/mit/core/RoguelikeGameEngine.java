@@ -12,6 +12,7 @@ public class RoguelikeGameEngine {
         while (!mGameState.isGameOver()) {
             makeTurns();
         }
+        TerminalGUI.terminate();
     }
 
     private void initialize() throws IOException {
