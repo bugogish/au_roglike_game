@@ -34,9 +34,19 @@ public class Map {
         while (items.size() < GameState.numberOfItems) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
             Item item = ItemFactory.createDefaultItem(randomType);
-            items.put(item.getCurrentPosition(), item);
-        }
+            TerminalPosition itemPos = new TerminalPosition(
+                    rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
+                    rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
 
+            while (intersectsWithObstacle(itemPos)) {
+                itemPos = new TerminalPosition(
+                        rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
+                        rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
+            }
+
+            item.setCurrentPosition(itemPos);
+            items.put(itemPos, item);
+        }
         items.values().forEach(Drawable::draw);
     }
 
