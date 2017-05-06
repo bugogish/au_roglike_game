@@ -2,6 +2,7 @@ package ru.spbau.mit.core;
 
 
 import com.googlecode.lanterna.input.KeyStroke;
+import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.events.*;
 import ru.spbau.mit.utils.Direction;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class InputHandler {
     private InputHandler() {}
 
+    @NotNull
     public static Action handleInput() throws IOException {
         KeyStroke key = TerminalGUI.readInput();
 

@@ -13,6 +13,7 @@ public class TurnManager {
     private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
+        System.out.println("Handling fight");
         Player player = mGameState.getPlayer();
         Mob opponent = mGameState.getAttackingMob().get();
 

@@ -54,7 +54,7 @@ public abstract class Character extends Drawable {
     }
 
     public boolean isDead() {
-        return currentStats.getHealth() == 0;
+        return currentStats.getHealth() <= 0;
     }
 
     public Stats getStats() {
@@ -64,7 +64,13 @@ public abstract class Character extends Drawable {
     public abstract int getFightPower();
 
     public void fight(Character another) {
-        currentStats.decreaseHealth(another.getFightPower());
-        another.getStats().decreaseHealth(getFightPower());
+        int damageToThis = Math.round(another.getFightPower() * (1 - currentStats.getArmor() / 100));
+        int damageToAnother = getFightPower() * (1 - another.getStats().getArmor() / 100);
+
+        currentStats.decreaseHealth(damageToThis);
+        another.getStats().decreaseHealth(damageToAnother);
+
+        System.out.println(String.format("Players health %d", currentStats.getHealth()));
+        System.out.println(String.format("Mobs health %d", another.currentStats.getHealth()));
     }
 }

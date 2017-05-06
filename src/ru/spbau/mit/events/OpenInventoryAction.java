@@ -28,10 +28,10 @@ public class OpenInventoryAction implements Action{
     private void openInventoryView() throws IOException {
         ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(Inventory.TITLE);
 
-        if (gameState.getPlayer().getmInventory().isEmpty()) {
+        if (gameState.getPlayer().getInventory().isEmpty()) {
             ab.addAction("<Empty>", () -> {});
         } else {
-            for (Item item : gameState.getPlayer().getmInventory().getItems()) {
+            for (Item item : gameState.getPlayer().getInventory().getItems()) {
                 ab.addAction(item.getItemName(), () -> {
                     gameState.getPlayer().equipItem(item);
                     // TODO : here needs to be equip action
