@@ -13,11 +13,11 @@ import java.util.Random;
 import java.util.Set;
 
 public class Map {
-    private Set<Drawable> obstacles = new HashSet<>();
     //    private int obstaclesNum = 20;
-    private static final char obstacleSymbol = '▣';
+    private static final char OBSTACLE_SYMBOL = '▣';
+    private Set<Drawable> obstacles = new HashSet<>();
     private HashMap<Cell, Item> items = new HashMap<>();
-    private boolean [][] cells = new boolean[TerminalGUI.getMaxRow()][TerminalGUI.getMaxColumn()];
+    private boolean[][] cells = new boolean[TerminalGUI.getMaxRow()][TerminalGUI.getMaxColumn()];
 
     public Map() {
         for (int i = 0; i < TerminalGUI.getMaxRow(); i++) {
@@ -34,7 +34,7 @@ public class Map {
 
         while (obstacles.size() < GameState.numberOfObstacles) {
             Cell position = getFreeRandomPosition();
-            obstacles.add(new Drawable(obstacleSymbol, position) {});
+            obstacles.add(new Drawable(OBSTACLE_SYMBOL, position) {});
             occupyCell(position);
         }
 
@@ -57,7 +57,7 @@ public class Map {
         Random rand = new Random();
         Cell position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
                 rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
-        while(!isCellFree(position)) {
+        while (!isCellFree(position)) {
             position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
                     rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
         }
