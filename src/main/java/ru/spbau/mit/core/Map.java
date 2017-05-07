@@ -32,7 +32,7 @@ public class Map {
     private void generate() {
         Random rand = new Random();
 
-        while (obstacles.size() < GameState.numberOfObstacles) {
+        while (obstacles.size() < GameState.NUMBER_OF_OBSTACLES) {
             Cell position = getFreeRandomPosition();
             obstacles.add(new Drawable(OBSTACLE_SYMBOL, position) {});
             occupyCell(position);
@@ -40,7 +40,7 @@ public class Map {
 
         obstacles.forEach(Drawable::draw);
 
-        while (items.size() < GameState.numberOfItems) {
+        while (items.size() < GameState.NUMBER_OF_ITEMS) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
             Item item = ItemFactory.createDefaultItem(randomType);
             Cell position = getFreeRandomPosition();

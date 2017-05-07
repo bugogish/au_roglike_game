@@ -11,7 +11,7 @@ public abstract class Character extends Drawable {
     private Stats currentStats;
 
     public Character(char itemIcon, Stats currentStats) {
-        super(itemIcon, new Cell(0,0));
+        super(itemIcon, new Cell(0, 0));
         this.currentStats = currentStats;
     }
 
@@ -19,33 +19,29 @@ public abstract class Character extends Drawable {
         Cell newPosition = getCurrentPosition();
 
         switch (direction) {
-            case LEFT: {
+            case LEFT:
                 if (newPosition.getColumn() > 0) {
-                    newPosition = new Cell(newPosition.getColumn() - 1, newPosition.getRow() );
+                    newPosition = new Cell(newPosition.getColumn() - 1, newPosition.getRow());
                 }
                 break;
-            }
 
-            case RIGHT: {
+            case RIGHT:
                 if (newPosition.getColumn() < TerminalGUI.getMaxColumn() - 1) {
                     newPosition = new Cell(newPosition.getColumn() + 1, newPosition.getRow());
                 }
                 break;
-            }
 
-            case UP: {
+            case UP:
                 if (newPosition.getRow() > 0) {
                     newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() - 1);
                 }
                 break;
-            }
 
-            case DOWN: {
+            case DOWN:
                 if (newPosition.getRow() < TerminalGUI.getMaxRow() - 1) {
                     newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() + 1);
                 }
                 break;
-            }
         }
 
         return newPosition;

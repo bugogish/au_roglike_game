@@ -2,23 +2,19 @@ package ru.spbau.mit.core.mobs;
 
 import java.util.Random;
 
-public class MobsFactory {
+public final class MobsFactory {
     private MobsFactory() {};
 
     public static Mob createMob(MobType type) {
         switch (type) {
-            case CREEP: {
+            case CREEP:
                 return new Creep();
-            }
-            case MONSTER: {
+            case MONSTER:
                 return new Monster();
-            }
-            case BOSS: {
+            case BOSS:
                 return new Boss();
-            }
-            default: {
-                return null;
-            }
+            default:
+                return new Creep();
         }
     }
 
