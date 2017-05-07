@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class TerminalGUI {
+public final class TerminalGUI {
     private static Terminal terminal = null;
     private static Screen screen = null;
     private static int maxX;

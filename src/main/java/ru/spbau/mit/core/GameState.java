@@ -11,17 +11,18 @@ import java.util.*;
 // TODO : weird that I can instantiate as many game states as I want (maybe it should be a singleton after all)
 
 public class GameState {
+    // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
+    public final static int MAX_TURN_STEPS = 1;
+    public final static int NUMBER_OF_OBSTACLES = 20;
+    public final static int NUMBER_OF_MOBS = 10;
+    public final static int NUMBER_OF_ITEMS = 7;
+
     private final Player player = new Player();
     private Map currentMap = new Map();
     private Set<Mob> mobs = new HashSet<>();
     private boolean playersTurn = false;
-    private boolean gameOver = false;
 
-    // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
-    public final static int maxTurnSteps = 1;
-    public final static int numberOfObstacles = 20;
-    public final static int numberOfMobs = 10;
-    public final static int numberOfItems = 7;
+    private boolean gameOver = false;
 
 
     public GameState() throws IOException {
@@ -47,7 +48,7 @@ public class GameState {
     }
 
     private void generateMobs() throws IOException {
-        for (int i = 0; i < numberOfMobs; i++) {
+        for (int i = 0; i < NUMBER_OF_MOBS; i++) {
             Mob mob = MobsFactory.createRandomMob();
             Cell position = currentMap.getFreeRandomPosition();
             mob.setCurrentPosition(position);

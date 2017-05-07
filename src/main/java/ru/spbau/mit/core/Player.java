@@ -6,14 +6,14 @@ import ru.spbau.mit.core.items.Shield;
 
 public class Player extends Character {
     private static final char DEFAULT_ICON = '⛹';
-    private static final Stats baseStats = new Stats(100, 100, 1);
+    private static final Stats BASE_STATS = new Stats(100, 100, 1);
     private static final double ARMOR_POWER_DECREASE = 0.2;
     private Inventory mInventory = new Inventory();
     private Item weaponEquipped = null;
     private Item defenceEquipped = null;
 
     public Player() {
-        super(DEFAULT_ICON, baseStats);
+        super(DEFAULT_ICON, BASE_STATS);
     }
 
     public void pickUp(Item item) {

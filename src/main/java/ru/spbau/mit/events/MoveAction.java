@@ -1,6 +1,5 @@
 package ru.spbau.mit.events;
 
-import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Player;
 import ru.spbau.mit.utils.Cell;
@@ -9,7 +8,7 @@ import ru.spbau.mit.utils.Direction;
 import java.io.IOException;
 
 public class MoveAction implements Action {
-    private static int stepsLeft = GameState.maxTurnSteps;
+    private static int stepsLeft = GameState.MAX_TURN_STEPS;
     private Direction direction;
     private GameState gameState;
 
@@ -18,13 +17,13 @@ public class MoveAction implements Action {
     }
 
     private boolean isStepAllowed(Cell newPosition) {
-        return stepsLeft > 0 &&
-                !gameState.getCurrentMap().intersectsWithObstacle(newPosition) &&
-                !newPosition.equals(gameState.getPlayer().getCurrentPosition());
+        return stepsLeft > 0
+                && !gameState.getCurrentMap().intersectsWithObstacle(newPosition)
+                && !newPosition.equals(gameState.getPlayer().getCurrentPosition());
     }
 
     private void refreshSteps() {
-        stepsLeft = GameState.maxTurnSteps;
+        stepsLeft = GameState.MAX_TURN_STEPS;
     }
 
     @Override

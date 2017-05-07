@@ -5,49 +5,40 @@ package ru.spbau.mit.core.items;
 import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.core.Stats;
 
-public class ItemFactory {
+public final class ItemFactory {
     private ItemFactory(){}
 
     @NotNull
     public static Item createDefaultItem(ItemType type) {
         switch (type) {
-            case DAGGER: {
+            case DAGGER:
                 return new Dagger();
-            }
-            case SHIELD: {
+            case SHIELD:
                 return new Shield();
-            }
-            default: {
+            default:
                 return new Dagger();
-            }
         }
     }
 
     public Item createWithDescriptionAndStats(ItemType type, String description, Stats change) {
         switch (type) {
-            case DAGGER: {
+            case DAGGER:
                 return new Dagger(description, change);
-            }
-            case SHIELD: {
+            case SHIELD:
                 return new Shield(description, change);
-            }
-            default: {
+            default:
                 return null;
-            }
         }
     }
 
     public Item createCustomItem(ItemType type, String name, String description, Stats change, char icon) {
         switch (type) {
-            case DAGGER: {
+            case DAGGER:
                 return new Dagger(name, description, change, icon);
-            }
-            case SHIELD: {
+            case SHIELD:
                 return new Shield(name, description, change, icon);
-            }
-            default: {
+            default:
                 return null;
-            }
         }
     }
 }

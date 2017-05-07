@@ -7,7 +7,7 @@ import java.io.IOException;
 public class RoguelikeGameEngine {
     private GameState mGameState;
 
-    public void start() throws IOException{
+    public void start() throws IOException {
         initialize();
         while (!mGameState.isGameOver()) {
             makeTurns();
@@ -20,7 +20,7 @@ public class RoguelikeGameEngine {
         mGameState = new GameState();
     }
 
-    public void makeTurns() throws IOException{
+    public void makeTurns() throws IOException {
         TurnManager.handlePlayersTurn(mGameState);
         TurnManager.handleAIsTurn(mGameState);
     }
