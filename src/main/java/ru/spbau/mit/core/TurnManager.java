@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Set;
 
-public class TurnManager {
+public final class TurnManager {
     // TODO : This is a field for mob AI
-    private static final int chaseRadius = 7;
+    private static final int CHASE_RADIUS = 7;
     private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
@@ -50,17 +50,17 @@ public class TurnManager {
     }
 
     private static boolean isInTargetsRadius(Cell object, Cell target) {
-        return Math.abs(object.getRow() - target.getRow()) < chaseRadius &&
-                Math.abs(object.getColumn() - target.getColumn()) < chaseRadius;
+        return Math.abs(object.getRow() - target.getRow()) < CHASE_RADIUS
+                && Math.abs(object.getColumn() - target.getColumn()) < CHASE_RADIUS;
     }
 
     private static Cell moveRandom(Mob mob, GameState gameState) throws IOException {
         Random random = new Random();
-        Direction direction = Direction.values()[random.nextInt(4)];
+        Direction direction = Direction.values()[random.nextInt(Direction.values().length)];
         Cell position = mob.maybeMove(direction);
 
         while (!gameState.getCurrentMap().isCellFree(position)) {
-            direction = Direction.values()[random.nextInt(4)];
+            direction = Direction.values()[random.nextInt(Direction.values().length)];
             position = mob.maybeMove(direction);
         }
 

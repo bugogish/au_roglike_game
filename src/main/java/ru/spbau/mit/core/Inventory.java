@@ -1,16 +1,8 @@
 package ru.spbau.mit.core;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.gui2.dialogs.ActionListDialogBuilder;
-import com.googlecode.lanterna.gui2.table.Table;
-import com.googlecode.lanterna.terminal.Terminal;
-import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.items.Item;
-import ru.spbau.mit.core.GUI.Drawable;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Inventory {
     public static final String TITLE = "Inventory";
