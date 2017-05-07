@@ -81,14 +81,6 @@ public final class TurnManager {
             if (rowDist > 0) {
                 newPosition = mob.maybeMove(Direction.UP);
             }
-
-//            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-//                if (columnDist < 0) {
-//                    newPosition = mob.maybeMove(Direction.DOWN);
-//                } else {
-//                    newPosition = mob.maybeMove(Direction.UP);
-//                }
-//            }
         } else {
             if (columnDist < 0) {
                 newPosition = mob.maybeMove(Direction.RIGHT);
@@ -96,17 +88,14 @@ public final class TurnManager {
             if (columnDist > 0) {
                 newPosition = mob.maybeMove(Direction.LEFT);
             }
-//            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-//                if (rowDist < 0) {
-//                    newPosition = mob.maybeMove(Direction.RIGHT);
-//                } else if (rowDist > 0) {
-//                    newPosition = mob.maybeMove(Direction.LEFT);
-//                }
-//            }
         }
 
-
-        return newPosition;
+        if (gameState.getCurrentMap().isCellFree(newPosition)){
+            return newPosition;
+        }
+        else {
+            return position;
+        }
     }
 
     // TODO : Don't know where to put this random walk
