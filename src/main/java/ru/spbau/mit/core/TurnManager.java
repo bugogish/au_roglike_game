@@ -74,33 +74,35 @@ public final class TurnManager {
         int rowDist = position.getRow() - target.getRow();
         int columnDist = position.getColumn() - target.getColumn();
 
-        if (Math.abs(rowDist) < Math.abs(columnDist)) {
+        if (Math.abs(rowDist) > Math.abs(columnDist)) {
             if (rowDist < 0) {
-                newPosition = mob.maybeMove(Direction.RIGHT);
-            } else if (rowDist > 0) {
-                newPosition = mob.maybeMove(Direction.LEFT);
-            }
-
-            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-                if (columnDist < 0) {
-                    newPosition = mob.maybeMove(Direction.DOWN);
-                } else {
-                    newPosition = mob.maybeMove(Direction.UP);
-                }
-            }
-        } else {
-            if (columnDist < 0) {
                 newPosition = mob.maybeMove(Direction.DOWN);
-            } else {
+            }
+            if (rowDist > 0) {
                 newPosition = mob.maybeMove(Direction.UP);
             }
-            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
-                if (rowDist < 0) {
-                    newPosition = mob.maybeMove(Direction.RIGHT);
-                } else if (rowDist > 0) {
-                    newPosition = mob.maybeMove(Direction.LEFT);
-                }
+
+//            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
+//                if (columnDist < 0) {
+//                    newPosition = mob.maybeMove(Direction.DOWN);
+//                } else {
+//                    newPosition = mob.maybeMove(Direction.UP);
+//                }
+//            }
+        } else {
+            if (columnDist < 0) {
+                newPosition = mob.maybeMove(Direction.RIGHT);
             }
+            if (columnDist > 0) {
+                newPosition = mob.maybeMove(Direction.LEFT);
+            }
+//            if (!gameState.getCurrentMap().isCellFree(newPosition) || newPosition.equals(position)) {
+//                if (rowDist < 0) {
+//                    newPosition = mob.maybeMove(Direction.RIGHT);
+//                } else if (rowDist > 0) {
+//                    newPosition = mob.maybeMove(Direction.LEFT);
+//                }
+//            }
         }
 
 

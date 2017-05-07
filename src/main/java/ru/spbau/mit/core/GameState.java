@@ -25,7 +25,7 @@ public class GameState {
 
 
     public GameState() throws IOException {
-        currentMap.occupyCell(player.getCurrentPosition());
+//        currentMap.occupyCell(player.getCurrentPosition());
         player.draw();
         generateMobs();
     }
