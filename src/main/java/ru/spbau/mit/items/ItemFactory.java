@@ -13,6 +13,8 @@ public final class ItemFactory {
                 return new Dagger();
             case SHIELD:
                 return new Shield();
+            case HEAL:
+                return new Heal();
             default:
                 return new Dagger();
         }

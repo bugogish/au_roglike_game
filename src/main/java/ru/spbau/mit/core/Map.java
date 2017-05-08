@@ -86,13 +86,13 @@ public class Map {
     }
 
     @Nullable
-    public Item removeItemByPosition(Cell position) {
+    public Item getItemByPosition(Cell position) {
         Optional<Item> item = items.stream().filter(i -> i.getCurrentPosition().equals(position)).findAny();
-        if (item.isPresent()) {
-            items.remove(item.get());
-            return item.get();
-        }
-        return null;
+        return item.orElse(null);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 
     public boolean isCellFree(Cell position) {
@@ -103,7 +103,6 @@ public class Map {
         cells[position.getRow()][position.getColumn()] = false;
     }
 
-    // TODO : NEEDS REFACTORING !!
     public void freeCell(Cell position) {
         cells[position.getRow()][position.getColumn()] = true;
     }
