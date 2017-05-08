@@ -18,6 +18,34 @@ public final class GamePlayManager {
         mobsAI = new MobsAI(gameState.getCurrentMap());
     }
 
+    public void handlePlayersTurn(GameState mGameState) throws IOException {
+        mGameState.setPlayersTurn(true);
+
+        while (mGameState.isPlayersTurn()) {
+            InputHandler.handleInput().doAction(mGameState);
+            handleGameResponse(mGameState);
+        }
+    }
+
+    public void handleAIsTurn(GameState gameState) throws IOException {
+        mobsAI.moveMobs(gameState);
+        handleGameResponse(gameState);
+        gameState.setPlayersTurn(true);
+    }
+
+    private void handleGameResponse(GameState mGameState) throws IOException {
+        Player player = mGameState.getPlayer();
+
+        if (mGameState.isFightSituation()) {
+            handleFight(mGameState);
+        }
+
+        Item maybeItem = mGameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
+        if (maybeItem != null) {
+            player.pickUp(maybeItem);
+        }
+    }
+
     private void handleFight(GameState mGameState) throws IOException {
         logger.info("Handling fight");
         Player player = mGameState.getPlayer();
@@ -34,29 +62,5 @@ public final class GamePlayManager {
             logger.info("Mob is dead");
             mGameState.removeMob(opponent);
         }
-    }
-
-    public void handlePlayersTurn(GameState mGameState) throws IOException {
-        mGameState.setPlayersTurn(true);
-
-        while (mGameState.isPlayersTurn()) {
-            InputHandler.handleInput().doAction(mGameState);
-
-            Player player = mGameState.getPlayer();
-
-            if (mGameState.isFightSituation()) {
-                handleFight(mGameState);
-            }
-
-            Item maybeItem = mGameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
-            if (maybeItem != null) {
-                player.pickUp(maybeItem);
-            }
-        }
-    }
-
-    public void handleAIsTurn(GameState gameState) throws IOException {
-        mobsAI.moveMobs(gameState);
-        gameState.setPlayersTurn(true);
     }
 }
