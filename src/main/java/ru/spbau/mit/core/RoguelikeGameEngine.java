@@ -5,12 +5,12 @@ import ru.spbau.mit.GUI.TerminalGUI;
 import java.io.IOException;
 
 public class RoguelikeGameEngine {
-    private GameState mGameState;
-    private GamePlayManager gamePlayManager;
+    private GameState gameState;
+    private GameplayManager gameplayManager;
 
     public void start() throws IOException {
         initialize();
-        while (!mGameState.isGameOver()) {
+        while (!gameState.isGameOver()) {
             makeTurns();
         }
         TerminalGUI.terminate();
@@ -18,12 +18,12 @@ public class RoguelikeGameEngine {
 
     private void initialize() throws IOException {
         TerminalGUI.initialize();
-        mGameState = new GameState();
-        gamePlayManager = new GamePlayManager(mGameState);
+        gameState = new GameState();
+        gameplayManager = new GameplayManager(gameState);
     }
 
     private void makeTurns() throws IOException {
-        gamePlayManager.handlePlayersTurn(mGameState);
-        gamePlayManager.handleAIsTurn(mGameState);
+        gameplayManager.handlePlayersTurn(gameState);
+        gameplayManager.handleAIsTurn(gameState);
     }
 }

@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class MobsAI {
     private static final int CHASE_RADIUS = 7;
-    private Map currentMap;
+    private GameState gameState;
 
-    public MobsAI(Map map) {
-        currentMap = map;
+    public MobsAI(GameState gameState) {
+        this.gameState = gameState;
     }
 
     private boolean isInTargetsRadius(Cell object, Cell target) {
@@ -22,7 +22,7 @@ public class MobsAI {
                 && Math.abs(object.getColumn() - target.getColumn()) < CHASE_RADIUS;
     }
 
-    private Cell moveRandom(Mob mob, GameState gameState) throws IOException {
+    private Cell moveRandom(Mob mob) throws IOException {
         Random random = new Random();
         Direction direction = Direction.values()[random.nextInt(Direction.values().length)];
         Cell position = mob.maybeMove(direction);
@@ -36,7 +36,7 @@ public class MobsAI {
     }
 
     // TODO : THIS NEEDS TO BE REDONE
-    private Cell moveToTarget(Mob mob, GameState gameState, Cell target) throws IOException {
+    private Cell moveToTarget(Mob mob, Cell target) throws IOException {
         Cell position = mob.getCurrentPosition();
         Cell newPosition = position;
         int rowDist = position.getRow() - target.getRow();
@@ -66,7 +66,7 @@ public class MobsAI {
         }
     }
 
-    public void moveMobs(GameState gameState) throws IOException {
+    public void moveMobs() throws IOException {
         Cell target = gameState.getPlayer().getCurrentPosition();
         Set<Mob> mobs = gameState.getMobs();
         Map map = gameState.getCurrentMap();
@@ -75,9 +75,9 @@ public class MobsAI {
             Cell position;
             if (isInTargetsRadius(mob.getCurrentPosition(), target)) {
                 // TODO : Mob still can eat an obstacle (fix it)
-                position = moveToTarget(mob, gameState, target);
+                position = moveToTarget(mob, target);
             } else {
-                position = moveRandom(mob, gameState);
+                position = moveRandom(mob);
             }
 
             map.replace(mob.getCurrentPosition(), position);
