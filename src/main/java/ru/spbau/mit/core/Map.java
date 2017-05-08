@@ -88,7 +88,7 @@ public class Map {
     public Item removeItemByPosition(Cell position) {
         Optional<Item> item = items.stream().filter(i -> i.getCurrentPosition().equals(position)).findAny();
         if (item.isPresent()) {
-            items.remove(item);
+            items.remove(item.get());
             return item.get();
         }
         return null;
