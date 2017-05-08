@@ -1,7 +1,5 @@
 package ru.spbau.mit.items;
 
-// TODO : Implement - this is a placeholder
-
 import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.characters.Stats;
 
@@ -20,6 +18,7 @@ public final class ItemFactory {
         }
     }
 
+    @NotNull
     public Item createWithDescriptionAndStats(ItemType type, String description, Stats change) {
         switch (type) {
             case DAGGER:
@@ -27,10 +26,11 @@ public final class ItemFactory {
             case SHIELD:
                 return new Shield(description, change);
             default:
-                return null;
+                return new Dagger(description, change);
         }
     }
 
+    @NotNull
     public Item createCustomItem(ItemType type, String name, String description, Stats change, char icon) {
         switch (type) {
             case DAGGER:
@@ -38,7 +38,7 @@ public final class ItemFactory {
             case SHIELD:
                 return new Shield(name, description, change, icon);
             default:
-                return null;
+                return new Dagger(name, description, change, icon);
         }
     }
 }
