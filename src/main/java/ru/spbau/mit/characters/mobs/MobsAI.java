@@ -5,7 +5,6 @@ import ru.spbau.mit.core.Map;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class MobsAI {
                 && Math.abs(object.getColumn() - target.getColumn()) < CHASE_RADIUS;
     }
 
-    private Cell moveRandom(Mob mob) throws IOException {
+    private Cell moveRandom(Mob mob) {
         Random random = new Random();
         Direction direction = Direction.values()[random.nextInt(Direction.values().length)];
         Cell position = mob.maybeMove(direction);
@@ -36,7 +35,7 @@ public class MobsAI {
     }
 
     // TODO : THIS NEEDS TO BE REDONE
-    private Cell moveToTarget(Mob mob, Cell target) throws IOException {
+    private Cell moveToTarget(Mob mob, Cell target) {
         Cell position = mob.getCurrentPosition();
         Cell newPosition = position;
         int rowDist = position.getRow() - target.getRow();
@@ -66,7 +65,7 @@ public class MobsAI {
         }
     }
 
-    public void moveMobs() throws IOException {
+    public void moveMobs() {
         Cell target = gameState.getPlayer().getCurrentPosition();
         Set<Mob> mobs = gameState.getMobs();
         Map map = gameState.getCurrentMap();

@@ -5,5 +5,5 @@ import ru.spbau.mit.core.GameState;
 import java.io.IOException;
 
 public interface KeyboardAction {
-    void doAction(GameState gameState) throws IOException;
+    void doAction(GameState gameState);
 }

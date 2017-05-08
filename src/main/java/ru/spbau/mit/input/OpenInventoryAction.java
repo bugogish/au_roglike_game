@@ -7,13 +7,11 @@ import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Item;
 
-import java.io.IOException;
-
 public class OpenInventoryAction implements KeyboardAction {
     private GameState gameState;
 
     @Override
-    public void doAction(GameState gameState) throws IOException {
+    public void doAction(GameState gameState) {
         this.gameState = gameState;
         openInventoryView();
         restoreScreen();
