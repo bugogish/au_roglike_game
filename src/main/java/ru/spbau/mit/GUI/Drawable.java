@@ -22,14 +22,10 @@ public abstract class Drawable {
     }
 
     public void draw() {
-        try {
-            TerminalGUI.addToTerminal(this);
-        } catch (IOException e) {
-            //TODO : WHERE AND HOW PROCESS THIS EXCEPTION
-        }
+        TerminalGUI.addToTerminal(this);
     }
 
-    public void redrawTo(Cell position) throws IOException {
+    public void redrawTo(Cell position) {
         TerminalGUI.removeFromTerminal(this);
         this.currentPosition = position;
         TerminalGUI.addToTerminal(this);

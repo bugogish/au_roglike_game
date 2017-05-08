@@ -8,59 +8,58 @@ import ru.spbau.mit.characters.mobs.MobsAI;
 import ru.spbau.mit.input.InputHandler;
 import ru.spbau.mit.items.Item;
 
-import java.io.IOException;
-
 public final class GameplayManager {
     private static final Logger logger = LogManager.getLogger(GameplayManager.class);
+    private final GameState gameState;
     private MobsAI mobsAI;
 
     public GameplayManager(GameState gameState) {
         mobsAI = new MobsAI(gameState);
+        this.gameState = gameState;
     }
 
-    public void handlePlayersTurn(GameState mGameState) throws IOException {
-        mGameState.setPlayersTurn(true);
+    void handlePlayersTurn() {
+        gameState.setPlayersTurn(true);
 
-        while (mGameState.isPlayersTurn()) {
-            InputHandler.handleInput().doAction(mGameState);
-            handleGameResponse(mGameState);
+        while (gameState.isPlayersTurn()) {
+            InputHandler.handleInput().doAction(gameState);
+            handleGameResponse();
         }
     }
 
-    public void handleAIsTurn(GameState gameState) throws IOException {
+    void handleAIsTurn() {
         mobsAI.moveMobs();
-        handleGameResponse(gameState);
+        handleGameResponse();
         gameState.setPlayersTurn(true);
     }
 
-    private void handleGameResponse(GameState mGameState) throws IOException {
-        Player player = mGameState.getPlayer();
+    private void handleGameResponse() {
+        Player player = gameState.getPlayer();
 
-        if (mGameState.isFightSituation()) {
-            handleFight(mGameState);
+        if (gameState.isFightSituation()) {
+            handleFight();
         }
 
-        Item maybeItem = mGameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
+        Item maybeItem = gameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
         if (maybeItem != null) {
             player.pickUp(maybeItem);
         }
     }
 
-    private void handleFight(GameState mGameState) throws IOException {
-        logger.info("Handling fight");
-        Player player = mGameState.getPlayer();
-        Mob opponent = mGameState.getAttackingMob().get();
+    private void handleFight() {
+        Player player = gameState.getPlayer();
+        Mob opponent = gameState.getAttackingMob().get();
 
         player.fight(opponent);
 
         if (player.isDead()) {
             logger.info("Player was killed");
-            mGameState.setGameOver();
+            gameState.setGameOver();
         }
 
         if (opponent.isDead()) {
             logger.info("Mob is dead");
-            mGameState.removeMob(opponent);
+            gameState.removeMob(opponent);
         }
     }
 }

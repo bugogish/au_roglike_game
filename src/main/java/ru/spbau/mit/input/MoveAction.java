@@ -27,7 +27,7 @@ public class MoveAction implements KeyboardAction {
     }
 
     @Override
-    public void doAction(GameState gameState) throws IOException {
+    public void doAction(GameState gameState) {
         Player player = gameState.getPlayer();
         this.gameState = gameState;
         Cell newPosition = player.maybeMove(direction);

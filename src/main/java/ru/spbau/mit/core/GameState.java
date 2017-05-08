@@ -13,9 +13,8 @@ import java.util.Set;
 
 
 public class GameState {
-    // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
     public final static int MAX_TURN_STEPS = 1;
-    public final static int NUMBER_OF_MOBS = 10;
+    private final static int NUMBER_OF_MOBS = 20;
 
     private final Player player = new Player();
     private Map currentMap = new Map(TerminalGUI.getMaxRow(), TerminalGUI.getMaxColumn());
