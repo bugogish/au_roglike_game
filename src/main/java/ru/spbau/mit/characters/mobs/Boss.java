@@ -8,7 +8,7 @@ public class Boss extends Mob {
     private static final double ARMOR_POWER_DECREASE = 0.3;
 
     public Boss() {
-        super(DEFAULT_ICON, DEFAULT_STATS);
+        super(DEFAULT_ICON, new Stats(DEFAULT_STATS));
     }
 
     @Override

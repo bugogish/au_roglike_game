@@ -10,6 +10,11 @@ public class Stats {
         this.stamina = stamina;
         this.armor = armor;
     }
+    public Stats(Stats stats) {
+        this.health = stats.getHealth();
+        this.stamina = stats.getStamina();
+        this.armor = stats.getArmor();
+    }
 
     public int getHealth() {
         return health;

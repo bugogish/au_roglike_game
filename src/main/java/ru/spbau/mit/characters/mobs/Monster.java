@@ -8,7 +8,7 @@ public class Monster extends Mob {
     private static final double ARMOR_POWER_DECREASE = 0.4;
 
     public Monster() {
-        super(DEFAULT_ICON, DEFAULT_STATS);
+        super(DEFAULT_ICON, new Stats(DEFAULT_STATS));
     }
 
     @Override
