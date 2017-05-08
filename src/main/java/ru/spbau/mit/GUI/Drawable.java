@@ -31,7 +31,7 @@ public abstract class Drawable {
         TerminalGUI.addToTerminal(this);
     }
 
-    public void clear() throws IOException {
+    public void clear() {
         TerminalGUI.removeFromTerminal(this);
     }
 
