@@ -3,6 +3,9 @@ package ru.spbau.mit.GUI;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
+import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogBuilder;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -47,6 +50,12 @@ public final class TerminalGUI {
 
     public static int getMaxRow() {
         return maxX;
+    }
+
+    public static void showMessageDialog(String title, String text) {
+        final WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
+        MessageDialog.showMessageDialog(textGUI, title, text);
+        screen.clear();
     }
 
     public static void addToTerminal(Drawable... items) {

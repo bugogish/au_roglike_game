@@ -17,6 +17,7 @@ public class RoguelikeGameEngine {
 
     private void initialize() {
         TerminalGUI.initialize();
+        TerminalGUI.showMessageDialog("Manual", "Move character - arrows\nOpen inventory - i\nSkip turn - Spacebar");
         gameState = new GameState();
         gameplayManager = new GameplayManager(gameState);
     }
