@@ -1,7 +1,6 @@
 package ru.spbau.mit.characters;
 
 import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
@@ -18,27 +17,19 @@ public abstract class Character extends Drawable {
 
         switch (direction) {
             case LEFT:
-                if (newPosition.getColumn() > 0) {
-                    newPosition = new Cell(newPosition.getColumn() - 1, newPosition.getRow());
-                }
+                newPosition = new Cell(newPosition.getColumn() - 1, newPosition.getRow());
                 break;
 
             case RIGHT:
-                if (newPosition.getColumn() < TerminalGUI.getMaxColumn() - 1) {
-                    newPosition = new Cell(newPosition.getColumn() + 1, newPosition.getRow());
-                }
+                newPosition = new Cell(newPosition.getColumn() + 1, newPosition.getRow());
                 break;
 
             case UP:
-                if (newPosition.getRow() > 0) {
-                    newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() - 1);
-                }
+                newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() - 1);
                 break;
 
             case DOWN:
-                if (newPosition.getRow() < TerminalGUI.getMaxRow() - 1) {
-                    newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() + 1);
-                }
+                newPosition = new Cell(newPosition.getColumn(), newPosition.getRow() + 1);
                 break;
         }
 

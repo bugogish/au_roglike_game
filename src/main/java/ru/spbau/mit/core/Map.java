@@ -71,6 +71,7 @@ public class Map {
         return position;
     }
 
+    // TODO : ???
     public void redrawContents() {
         obstacles.forEach(Drawable::draw);
         items.forEach(Drawable::draw);
@@ -99,12 +100,6 @@ public class Map {
     }
 
     public void occupyCell(Cell position) {
-        if (!cells[position.getRow()][position.getColumn()]) {
-            System.out.println("Cell has been already occupied");
-//            throw new Exception("Trying to occupy an occupied cell");
-//            throw new SOMEGAMEEXCEPTION;
-        }
-
         cells[position.getRow()][position.getColumn()] = false;
     }
 
