@@ -2,6 +2,7 @@ package ru.spbau.mit.characters;
 
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Dagger;
+import ru.spbau.mit.items.Heal;
 import ru.spbau.mit.items.Item;
 import ru.spbau.mit.items.Shield;
 
@@ -16,6 +17,7 @@ public class Player extends Character {
 
     public Player() {
         super(DEFAULT_ICON, BASE_STATS);
+        draw();
     }
 
     public Player(char icon, Stats baseStats) {
@@ -30,25 +32,40 @@ public class Player extends Character {
         return mInventory;
     }
 
-    public void equipItem(Item item) {
+    private void unEquipItem(Item item) {
+        item.setEquipped(false);
+
         if (item instanceof Dagger) {
             if (weaponEquipped != null) {
                 getStats().subtractStats(weaponEquipped.getStats());
-                weaponEquipped.setEquipped(false);
             }
+        }
+
+        if (item instanceof Shield) {
+            if (defenceEquipped != null) {
+                getStats().subtractStats(defenceEquipped.getStats());
+            }
+        }
+    }
+
+    public void equipItem(Item item) {
+        if (item instanceof Dagger) {
+            unEquipItem(item);
             getStats().addStats(item.getStats());
             weaponEquipped = item;
             weaponEquipped.setEquipped(true);
         }
 
         if (item instanceof Shield) {
-            if (defenceEquipped != null) {
-                getStats().subtractStats(defenceEquipped.getStats());
-                defenceEquipped.setEquipped(false);
-            }
+            unEquipItem(item);
             getStats().addStats(item.getStats());
             defenceEquipped = item;
             defenceEquipped.setEquipped(true);
+        }
+
+        if (item instanceof Heal) {
+            getStats().addStats(item.getStats());
+            mInventory.dropItem(item);
         }
     }
 

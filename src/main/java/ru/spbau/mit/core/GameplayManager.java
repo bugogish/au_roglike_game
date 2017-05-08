@@ -40,9 +40,10 @@ public final class GameplayManager {
             handleFight();
         }
 
-        Item maybeItem = gameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
+        Item maybeItem = gameState.getCurrentMap().getItemByPosition(player.getCurrentPosition());
         if (maybeItem != null) {
             player.pickUp(maybeItem);
+            gameState.getCurrentMap().removeItem(maybeItem);
         }
     }
 
