@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.input.InputHandler;
 import ru.spbau.mit.items.Item;
-import ru.spbau.mit.characters.Mob;
+import ru.spbau.mit.characters.mobs.Mob;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 

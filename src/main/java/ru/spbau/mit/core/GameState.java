@@ -2,8 +2,8 @@ package ru.spbau.mit.core;
 
 import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.GUI.TerminalGUI;
-import ru.spbau.mit.characters.Mob;
-import ru.spbau.mit.characters.MobsFactory;
+import ru.spbau.mit.characters.mobs.Mob;
+import ru.spbau.mit.characters.mobs.MobsFactory;
 import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.utils.Cell;
 
