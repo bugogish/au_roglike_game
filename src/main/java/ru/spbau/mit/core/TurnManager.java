@@ -1,5 +1,7 @@
 package ru.spbau.mit.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.mobs.Mob;
 import ru.spbau.mit.utils.Cell;
@@ -12,21 +14,23 @@ import java.util.Set;
 public final class TurnManager {
     // TODO : This is a field for mob AI
     private static final int CHASE_RADIUS = 7;
+    private static final Logger logger = LogManager.getLogger(TurnManager.class);
     private TurnManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
-        System.out.println("Handling fight");
+        logger.info("Handling fight");
         Player player = mGameState.getPlayer();
         Mob opponent = mGameState.getAttackingMob().get();
 
         player.fight(opponent);
 
         if (player.isDead()) {
+            logger.info("Player was killed");
             mGameState.setGameOver(true);
         }
 
         if (opponent.isDead()) {
-            System.out.println("Mob is dead!");
+            logger.info("Mob is dead");
             mGameState.killMob(opponent);
         }
     }
