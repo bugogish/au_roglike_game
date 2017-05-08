@@ -24,7 +24,6 @@ public final class InputHandler {
 
         switch (key.getKeyType()) {
             case Escape:
-                // TODO : THERE SHOULD BE END GAME SCREEN OR SMTH
                 return GameState::setGameOver;
 
             case Character:
