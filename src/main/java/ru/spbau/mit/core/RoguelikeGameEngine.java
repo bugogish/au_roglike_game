@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class RoguelikeGameEngine {
     private GameState mGameState;
+    private GamePlayManager gamePlayManager;
 
     public void start() throws IOException {
         initialize();
@@ -18,10 +19,11 @@ public class RoguelikeGameEngine {
     private void initialize() throws IOException {
         TerminalGUI.initialize();
         mGameState = new GameState();
+        gamePlayManager = new GamePlayManager(mGameState);
     }
 
-    public void makeTurns() throws IOException {
-        GamePlayManager.handlePlayersTurn(mGameState);
-        GamePlayManager.handleAIsTurn(mGameState);
+    private void makeTurns() throws IOException {
+        gamePlayManager.handlePlayersTurn(mGameState);
+        gamePlayManager.handleAIsTurn(mGameState);
     }
 }
