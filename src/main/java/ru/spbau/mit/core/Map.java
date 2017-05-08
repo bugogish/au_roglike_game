@@ -1,27 +1,33 @@
 package ru.spbau.mit.core;
 
+import org.jetbrains.annotations.Nullable;
 import ru.spbau.mit.core.GUI.Drawable;
-import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.items.Item;
 import ru.spbau.mit.core.items.ItemFactory;
 import ru.spbau.mit.core.items.ItemType;
 import ru.spbau.mit.utils.Cell;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Map {
-    //    private int obstaclesNum = 20;
     private static final char OBSTACLE_SYMBOL = '▣';
-    private Set<Drawable> obstacles = new HashSet<>();
-    private HashMap<Cell, Item> items = new HashMap<>();
-    private boolean[][] cells = new boolean[TerminalGUI.getMaxRow()][TerminalGUI.getMaxColumn()];
+    private static final int NUMBER_OF_ITEMS = 7;
+    private static final int NUMBER_OF_OBSTACLES = 20;
 
-    public Map() {
-        for (int i = 0; i < TerminalGUI.getMaxRow(); i++) {
-            for (int j = 0; j < TerminalGUI.getMaxColumn(); j++) {
+    private final int maxRow;
+    private final int maxColumn;
+
+    private Set<Drawable> obstacles = new HashSet<>();
+    private Set<Item> items = new HashSet<>();
+    private boolean[][] cells;
+
+    public Map(int maxRow, int maxColumn) {
+        this.maxRow = maxRow;
+        this.maxColumn = maxColumn;
+
+        cells = new boolean[maxRow][maxColumn];
+        for (int i = 0; i < maxRow; i++) {
+            for (int j = 0; j < maxColumn; j++) {
                 cells[i][j] = true;
             }
         }
@@ -32,7 +38,7 @@ public class Map {
     private void generate() {
         Random rand = new Random();
 
-        while (obstacles.size() < GameState.NUMBER_OF_OBSTACLES) {
+        while (obstacles.size() < NUMBER_OF_OBSTACLES) {
             Cell position = getFreeRandomPosition();
             obstacles.add(new Drawable(OBSTACLE_SYMBOL, position) {});
             occupyCell(position);
@@ -40,34 +46,34 @@ public class Map {
 
         obstacles.forEach(Drawable::draw);
 
-        while (items.size() < GameState.NUMBER_OF_ITEMS) {
+        while (items.size() < NUMBER_OF_ITEMS) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
             Item item = ItemFactory.createDefaultItem(randomType);
             Cell position = getFreeRandomPosition();
 
             item.setCurrentPosition(position);
             occupyCell(position);
-            items.put(position, item);
+            items.add(item);
         }
 
-        items.values().forEach(Drawable::draw);
+        items.forEach(Drawable::draw);
     }
 
     public Cell getFreeRandomPosition() {
         Random rand = new Random();
-        Cell position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
-                rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
+        Cell position = new Cell(rand.nextInt(maxColumn - 1),
+                rand.nextInt(maxRow - 1));
         while (!isCellFree(position)) {
-            position = new Cell(rand.nextInt(TerminalGUI.getMaxColumn() - 1) + 1,
-                    rand.nextInt(TerminalGUI.getMaxRow() - 1) + 1);
+            position = new Cell(rand.nextInt(maxColumn - 1),
+                    rand.nextInt(maxRow - 1));
         }
 
         return position;
     }
 
-    public void reDrawContents() {
+    public void redrawContents() {
         obstacles.forEach(Drawable::draw);
-        items.values().forEach(Drawable::draw);
+        items.forEach(Drawable::draw);
     }
 
     public boolean intersectsWithObstacle(Cell position) {
@@ -75,20 +81,23 @@ public class Map {
     }
 
     public boolean intersectsWithItem(Cell position) {
-        return items.get(position) != null;
+        return items.stream().anyMatch(obs -> obs.getCurrentPosition().equals(position));
     }
 
-    public Item removeItemOnPosition(Cell position) {
-        Item item = items.get(position);
-        items.remove(position);
-        return item;
+    @Nullable
+    public Item removeItemByPosition(Cell position) {
+        Optional<Item> item = items.stream().filter(i -> i.getCurrentPosition().equals(position)).findAny();
+        if (item.isPresent()) {
+            items.remove(item);
+            return item.get();
+        }
+        return null;
     }
 
     public boolean isCellFree(Cell position) {
         return cells[position.getRow()][position.getColumn()];
     }
 
-    // TODO : this being public looks ugly
     public void occupyCell(Cell position) {
         if (!cells[position.getRow()][position.getColumn()]) {
             System.out.println("Cell has been already occupied");

@@ -16,6 +16,10 @@ public class Player extends Character {
         super(DEFAULT_ICON, BASE_STATS);
     }
 
+    public Player(char icon, Stats baseStats) {
+        super(icon, baseStats);
+    }
+
     public void pickUp(Item item) {
         mInventory.add(item);
     }

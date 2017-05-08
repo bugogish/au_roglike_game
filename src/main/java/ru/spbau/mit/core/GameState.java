@@ -1,31 +1,29 @@
 package ru.spbau.mit.core;
 
 import ru.spbau.mit.core.GUI.Drawable;
+import ru.spbau.mit.core.GUI.TerminalGUI;
 import ru.spbau.mit.core.mobs.Mob;
 import ru.spbau.mit.core.mobs.MobsFactory;
 import ru.spbau.mit.utils.Cell;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-// TODO : weird that I can instantiate as many game states as I want (maybe it should be a singleton after all)
 
 public class GameState {
     // GAME SETTINGS (Maybe initialize a Settings class or function to set parameters for different difficulty levels)
     public final static int MAX_TURN_STEPS = 1;
-    public final static int NUMBER_OF_OBSTACLES = 20;
     public final static int NUMBER_OF_MOBS = 10;
-    public final static int NUMBER_OF_ITEMS = 7;
 
     private final Player player = new Player();
-    private Map currentMap = new Map();
+    private Map currentMap = new Map(TerminalGUI.getMaxRow(), TerminalGUI.getMaxColumn());
     private Set<Mob> mobs = new HashSet<>();
     private boolean playersTurn = false;
-
     private boolean gameOver = false;
 
 
-    public GameState() throws IOException {
+    public GameState() {
 //        currentMap.occupyCell(player.getCurrentPosition());
         player.draw();
         generateMobs();
@@ -35,8 +33,8 @@ public class GameState {
         return gameOver;
     }
 
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
+    public void setGameOver() {
+        this.gameOver = true;
     }
 
     public boolean isPlayersTurn() {
@@ -47,7 +45,7 @@ public class GameState {
         this.playersTurn = playersTurn;
     }
 
-    private void generateMobs() throws IOException {
+    private void generateMobs() {
         for (int i = 0; i < NUMBER_OF_MOBS; i++) {
             Mob mob = MobsFactory.createRandomMob();
             Cell position = currentMap.getFreeRandomPosition();
@@ -80,7 +78,7 @@ public class GameState {
         return mobs;
     }
 
-    public void killMob(Mob toBeKilled) {
+    public void removeMob(Mob toBeKilled) {
         mobs.remove(toBeKilled);
         currentMap.freeCell(toBeKilled.getCurrentPosition());
     }

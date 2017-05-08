@@ -15,7 +15,7 @@ public abstract class Character extends Drawable {
         this.currentStats = currentStats;
     }
 
-    public Cell maybeMove(Direction direction) throws IOException {
+    public Cell maybeMove(Direction direction) {
         Cell newPosition = getCurrentPosition();
 
         switch (direction) {

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Inventory {
     public static final String TITLE = "Inventory";
+    // TODO : disallow more than MAX_CAPACITY items in inventory
+    private static final int MAX_CAPACITY = 5;
     private ArrayList<Item> items = new ArrayList<>();
 
     public void add(Item item) {

@@ -22,7 +22,7 @@ public class OpenInventoryAction implements Action{
     private void restoreScreen() {
         gameState.getPlayer().draw();
         gameState.getMobs().forEach(Drawable::draw);
-        gameState.getCurrentMap().reDrawContents();
+        gameState.getCurrentMap().redrawContents();
     }
 
     private void openInventoryView() {

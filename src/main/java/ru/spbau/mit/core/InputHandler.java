@@ -22,7 +22,7 @@ public final class InputHandler {
             switch (key.getKeyType()) {
                 case Escape:
                     // TODO : THERE SHOULD BE END GAME SCREEN OR SMTH
-                    return gameState -> gameState.setGameOver(true);
+                    return gameState -> gameState.setGameOver();
 
                 case Character:
                     char pressedChar = key.getCharacter();
@@ -42,7 +42,7 @@ public final class InputHandler {
                         return new MoveAction(Direction.UP);
 
                 case EOF:
-                    return gameState -> gameState.setGameOver(true);
+                    return gameState -> gameState.setGameOver();
 
                 default:
                     return gameState -> {};
