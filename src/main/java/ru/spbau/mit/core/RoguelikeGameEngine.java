@@ -12,7 +12,7 @@ public class RoguelikeGameEngine {
         while (!gameState.isGameOver()) {
             makeTurns();
         }
-        TerminalGUI.terminate();
+        endGame();
     }
 
     private void initialize() {
@@ -25,5 +25,10 @@ public class RoguelikeGameEngine {
     private void makeTurns() {
         gameplayManager.handlePlayersTurn();
         gameplayManager.handleAIsTurn();
+    }
+
+    private void endGame() {
+        TerminalGUI.showMessageDialog("", "Game Over");
+        TerminalGUI.terminate();
     }
 }
