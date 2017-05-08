@@ -10,12 +10,12 @@ import ru.spbau.mit.items.Item;
 
 import java.io.IOException;
 
-public final class GamePlayManager {
-    private static final Logger logger = LogManager.getLogger(GamePlayManager.class);
+public final class GameplayManager {
+    private static final Logger logger = LogManager.getLogger(GameplayManager.class);
     private MobsAI mobsAI;
 
-    public GamePlayManager(GameState gameState) {
-        mobsAI = new MobsAI(gameState.getCurrentMap());
+    public GameplayManager(GameState gameState) {
+        mobsAI = new MobsAI(gameState);
     }
 
     public void handlePlayersTurn(GameState mGameState) throws IOException {
@@ -28,7 +28,7 @@ public final class GamePlayManager {
     }
 
     public void handleAIsTurn(GameState gameState) throws IOException {
-        mobsAI.moveMobs(gameState);
+        mobsAI.moveMobs();
         handleGameResponse(gameState);
         gameState.setPlayersTurn(true);
     }
