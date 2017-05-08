@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.GUI;
+package ru.spbau.mit.GUI;
 
 import ru.spbau.mit.utils.Cell;
 

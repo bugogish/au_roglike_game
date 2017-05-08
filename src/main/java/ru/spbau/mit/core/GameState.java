@@ -1,9 +1,9 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.core.GUI.Drawable;
-import ru.spbau.mit.core.GUI.TerminalGUI;
-import ru.spbau.mit.core.mobs.Mob;
-import ru.spbau.mit.core.mobs.MobsFactory;
+import ru.spbau.mit.GUI.Drawable;
+import ru.spbau.mit.GUI.TerminalGUI;
+import ru.spbau.mit.mobs.Mob;
+import ru.spbau.mit.mobs.MobsFactory;
 import ru.spbau.mit.utils.Cell;
 
 import java.util.HashSet;

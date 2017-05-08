@@ -1,8 +1,8 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.core.items.Dagger;
-import ru.spbau.mit.core.items.Item;
-import ru.spbau.mit.core.items.Shield;
+import ru.spbau.mit.items.Dagger;
+import ru.spbau.mit.items.Item;
+import ru.spbau.mit.items.Shield;
 
 public class Player extends Character {
     private static final char DEFAULT_ICON = '⛹';

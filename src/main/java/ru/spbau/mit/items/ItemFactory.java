@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.items;
+package ru.spbau.mit.items;
 
 // TODO : Implement - this is a placeholder
 

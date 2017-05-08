@@ -1,6 +1,6 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.core.GUI.TerminalGUI;
+import ru.spbau.mit.GUI.TerminalGUI;
 
 import java.io.IOException;
 

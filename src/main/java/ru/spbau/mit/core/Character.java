@@ -1,11 +1,9 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.core.GUI.Drawable;
-import ru.spbau.mit.core.GUI.TerminalGUI;
+import ru.spbau.mit.GUI.Drawable;
+import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
-
-import java.io.IOException;
 
 public abstract class Character extends Drawable {
     private Stats currentStats;

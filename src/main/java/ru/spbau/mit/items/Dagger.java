@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.items;
+package ru.spbau.mit.items;
 
 import ru.spbau.mit.core.Stats;
 

@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.mobs;
+package ru.spbau.mit.mobs;
 
 import ru.spbau.mit.core.Stats;
 
