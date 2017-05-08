@@ -34,17 +34,14 @@ public class Player extends Character {
 
     public void unEquipItem(Item item) {
         item.setEquipped(false);
+        getStats().subtractStats(item.getStats());
 
         if (item instanceof Dagger) {
-            if (weaponEquipped != null) {
-                getStats().subtractStats(weaponEquipped.getStats());
-            }
+            weaponEquipped = null;
         }
 
         if (item instanceof Shield) {
-            if (defenceEquipped != null) {
-                getStats().subtractStats(defenceEquipped.getStats());
-            }
+            defenceEquipped = null;
         }
     }
 
