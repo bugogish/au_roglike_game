@@ -7,7 +7,7 @@ import ru.spbau.mit.items.Item;
 import ru.spbau.mit.items.Shield;
 
 public class Player extends Character {
-    private static final char DEFAULT_ICON = '⛹';
+    private static final char DEFAULT_ICON = '웃';
     private static final Stats BASE_STATS = new Stats(100, 45, 1);
     private static final double ARMOR_POWER_DECREASE = 0.2;
 
