@@ -6,7 +6,7 @@ import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
 public class MoveAction implements KeyboardAction {
-    private final static int MAX_TURN_STEPS = 1;
+    private final static int MAX_TURN_STEPS = 2;
     private static int stepsLeft = MAX_TURN_STEPS;
 
     private Direction direction;
