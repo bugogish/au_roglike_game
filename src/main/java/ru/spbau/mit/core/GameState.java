@@ -13,7 +13,7 @@ import java.util.Set;
 
 
 public class GameState {
-    public final static int MAX_TURN_STEPS = 1;
+    public final static int MAX_TURN_STEPS = 3;
     private final static int NUMBER_OF_MOBS = 20;
 
     private final Player player = new Player();

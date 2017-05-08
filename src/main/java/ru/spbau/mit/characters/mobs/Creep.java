@@ -8,7 +8,7 @@ public class Creep extends Mob {
     private static final double ARMOR_POWER_DECREASE = 0.5;
 
     public Creep() {
-        super(DEFAULT_ICON, DEFAULT_STATS);
+        super(DEFAULT_ICON, new Stats(DEFAULT_STATS));
     }
 
     @Override
