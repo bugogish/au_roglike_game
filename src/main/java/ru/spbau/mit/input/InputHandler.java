@@ -27,7 +27,7 @@ public final class InputHandler {
                 case Character:
                     char pressedChar = key.getCharacter();
                     if (pressedChar == ' ') {
-//                        return gameState -> gameState.setPlayersTurn(false);
+                        return gameState -> gameState.setPlayersTurn(false);
                     } else if (pressedChar == 'i') {
                         return new OpenInventoryAction();
                     }
@@ -42,7 +42,7 @@ public final class InputHandler {
                         return new MoveAction(Direction.UP);
 
                 case EOF:
-                    return GameState::setGameOver;
+                    System.exit(0);
 
                 default:
                     return gameState -> {};
