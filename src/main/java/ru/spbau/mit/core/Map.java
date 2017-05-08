@@ -1,10 +1,10 @@
 package ru.spbau.mit.core;
 
 import org.jetbrains.annotations.Nullable;
-import ru.spbau.mit.core.GUI.Drawable;
-import ru.spbau.mit.core.items.Item;
-import ru.spbau.mit.core.items.ItemFactory;
-import ru.spbau.mit.core.items.ItemType;
+import ru.spbau.mit.GUI.Drawable;
+import ru.spbau.mit.items.Item;
+import ru.spbau.mit.items.ItemFactory;
+import ru.spbau.mit.items.ItemType;
 import ru.spbau.mit.utils.Cell;
 
 import java.util.*;

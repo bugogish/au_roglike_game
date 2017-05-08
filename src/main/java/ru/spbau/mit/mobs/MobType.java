@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.mobs;
+package ru.spbau.mit.mobs;
 
 public enum MobType {
     CREEP,

@@ -2,8 +2,9 @@ package ru.spbau.mit.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.spbau.mit.core.items.Item;
-import ru.spbau.mit.core.mobs.Mob;
+import ru.spbau.mit.input.InputHandler;
+import ru.spbau.mit.items.Item;
+import ru.spbau.mit.mobs.Mob;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
@@ -40,6 +41,7 @@ public final class TurnManager {
 
         while (mGameState.isPlayersTurn()) {
             InputHandler.handleInput().doAction(mGameState);
+
             Player player = mGameState.getPlayer();
 
             if (mGameState.isFightSituation()) {

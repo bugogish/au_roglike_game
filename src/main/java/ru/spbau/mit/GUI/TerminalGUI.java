@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.GUI;
+package ru.spbau.mit.GUI;
 
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;

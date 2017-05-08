@@ -1,4 +1,4 @@
-package ru.spbau.mit.core.items;
+package ru.spbau.mit.items;
 
 public enum ItemType {
     SHIELD,

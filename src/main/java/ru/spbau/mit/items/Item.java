@@ -1,6 +1,6 @@
-package ru.spbau.mit.core.items;
+package ru.spbau.mit.items;
 
-import ru.spbau.mit.core.GUI.Drawable;
+import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.core.Stats;
 import ru.spbau.mit.utils.Cell;
 

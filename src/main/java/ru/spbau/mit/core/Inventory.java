@@ -1,6 +1,6 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.core.items.Item;
+import ru.spbau.mit.items.Item;
 
 import java.util.ArrayList;
 
