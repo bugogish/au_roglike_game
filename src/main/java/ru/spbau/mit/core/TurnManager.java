@@ -26,12 +26,12 @@ public final class TurnManager {
 
         if (player.isDead()) {
             logger.info("Player was killed");
-            mGameState.setGameOver(true);
+            mGameState.setGameOver();
         }
 
         if (opponent.isDead()) {
             logger.info("Mob is dead");
-            mGameState.killMob(opponent);
+            mGameState.removeMob(opponent);
         }
     }
 
@@ -46,7 +46,7 @@ public final class TurnManager {
                 handleFight(mGameState);
             }
 
-            Item maybeItem = mGameState.getCurrentMap().removeItemOnPosition(player.getCurrentPosition());
+            Item maybeItem = mGameState.getCurrentMap().removeItemByPosition(player.getCurrentPosition());
             if (maybeItem != null) {
                 player.pickUp(maybeItem);
             }
