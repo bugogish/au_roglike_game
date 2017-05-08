@@ -13,7 +13,7 @@ import java.util.Set;
 
 
 public class GameState {
-    private final static int NUMBER_OF_MOBS = 40;
+    private final static int NUMBER_OF_MOBS = 25;
 
     private final Player player = new Player();
     private Map currentMap = new Map(TerminalGUI.getMaxRow(), TerminalGUI.getMaxColumn());
