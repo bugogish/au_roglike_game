@@ -2,8 +2,6 @@ package ru.spbau.mit.GUI;
 
 import ru.spbau.mit.utils.Cell;
 
-import java.io.IOException;
-
 public abstract class Drawable {
     private Cell currentPosition;
     private final char icon;

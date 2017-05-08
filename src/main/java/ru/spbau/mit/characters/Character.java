@@ -52,8 +52,5 @@ public abstract class Character extends Drawable {
 
         currentStats.decreaseHealth(damageToThis);
         another.getStats().decreaseHealth(damageToAnother);
-
-        System.out.println(String.format("Players health %d", currentStats.getHealth()));
-        System.out.println(String.format("Mobs health %d", another.currentStats.getHealth()));
     }
 }

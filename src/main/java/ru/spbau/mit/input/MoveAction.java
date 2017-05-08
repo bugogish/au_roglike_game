@@ -12,23 +12,12 @@ public class MoveAction implements KeyboardAction {
     private Direction direction;
     private GameState gameState;
 
-    public MoveAction(Direction direction) {
+    MoveAction(Direction direction) {
         this.direction = direction;
-    }
-
-    private boolean isStepAllowed(Cell newPosition) {
-        return stepsLeft > 0
-                && !gameState.getCurrentMap().intersectsWithObstacle(newPosition)
-                && !newPosition.equals(gameState.getPlayer().getCurrentPosition());
-    }
-
-    private void refreshSteps() {
-        stepsLeft = MAX_TURN_STEPS;
     }
 
     @Override
     public void doAction(GameState gameState) {
-        System.out.println(gameState.getPlayer().getStats().getHealth());
         this.gameState = gameState;
         Player player = gameState.getPlayer();
         Cell newPosition = player.maybeMove(direction);
@@ -42,5 +31,15 @@ public class MoveAction implements KeyboardAction {
             refreshSteps();
             gameState.setPlayersTurn(false);
         }
+    }
+
+    private boolean isStepAllowed(Cell newPosition) {
+        return stepsLeft > 0
+                && !gameState.getCurrentMap().intersectsWithObstacle(newPosition)
+                && !newPosition.equals(gameState.getPlayer().getCurrentPosition());
+    }
+
+    private void refreshSteps() {
+        stepsLeft = MAX_TURN_STEPS;
     }
 }

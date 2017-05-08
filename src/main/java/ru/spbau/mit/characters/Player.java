@@ -32,7 +32,7 @@ public class Player extends Character {
         return mInventory;
     }
 
-    private void unEquipItem(Item item) {
+    public void unEquipItem(Item item) {
         item.setEquipped(false);
 
         if (item instanceof Dagger) {

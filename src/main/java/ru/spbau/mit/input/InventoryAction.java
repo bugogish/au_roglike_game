@@ -7,7 +7,7 @@ import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Item;
 
-public class OpenInventoryAction implements KeyboardAction {
+public class InventoryAction implements KeyboardAction {
     private GameState gameState;
 
     @Override
@@ -32,11 +32,14 @@ public class OpenInventoryAction implements KeyboardAction {
             for (Item item : gameState.getPlayer().getInventory().getItems()) {
                 ab.addAction(
                         String.valueOf(item.getIcon()).concat(item.isEquipped() ? "  [Equipped]" : ""),
-                        () -> gameState.getPlayer().equipItem(item)
+                        () -> {
+                            if (!item.isEquipped()) gameState.getPlayer().equipItem(item);
+                            else {gameState.getPlayer().unEquipItem(item);}
+                        }
                 );
             }
         }
 
-        ab.build().showDialog(TerminalGUI.createNewScreen());
+        ab.build().showDialog(TerminalGUI.openNewScreen());
     }
 }
