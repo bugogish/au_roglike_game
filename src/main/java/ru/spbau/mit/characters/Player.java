@@ -1,5 +1,6 @@
-package ru.spbau.mit.core;
+package ru.spbau.mit.characters;
 
+import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Dagger;
 import ru.spbau.mit.items.Item;
 import ru.spbau.mit.items.Shield;

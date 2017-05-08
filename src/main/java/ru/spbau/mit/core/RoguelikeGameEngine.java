@@ -21,7 +21,7 @@ public class RoguelikeGameEngine {
     }
 
     public void makeTurns() throws IOException {
-        TurnManager.handlePlayersTurn(mGameState);
-        TurnManager.handleAIsTurn(mGameState);
+        GamePlayManager.handlePlayersTurn(mGameState);
+        GamePlayManager.handleAIsTurn(mGameState);
     }
 }

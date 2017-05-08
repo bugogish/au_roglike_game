@@ -2,9 +2,10 @@ package ru.spbau.mit.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.input.InputHandler;
 import ru.spbau.mit.items.Item;
-import ru.spbau.mit.mobs.Mob;
+import ru.spbau.mit.characters.Mob;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
@@ -12,11 +13,11 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Set;
 
-public final class TurnManager {
+public final class GamePlayManager {
     // TODO : This is a field for mob AI
     private static final int CHASE_RADIUS = 7;
-    private static final Logger logger = LogManager.getLogger(TurnManager.class);
-    private TurnManager() {}
+    private static final Logger logger = LogManager.getLogger(GamePlayManager.class);
+    private GamePlayManager() {}
 
     private static void handleFight(GameState mGameState) throws IOException {
         logger.info("Handling fight");

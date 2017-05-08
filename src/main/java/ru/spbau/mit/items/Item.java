@@ -1,7 +1,7 @@
 package ru.spbau.mit.items;
 
 import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.core.Stats;
+import ru.spbau.mit.characters.Stats;
 import ru.spbau.mit.utils.Cell;
 
 public abstract class Item extends Drawable {

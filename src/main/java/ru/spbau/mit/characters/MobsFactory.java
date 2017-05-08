@@ -1,4 +1,4 @@
-package ru.spbau.mit.mobs;
+package ru.spbau.mit.characters;
 
 import java.util.Random;
 

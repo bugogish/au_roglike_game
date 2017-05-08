@@ -1,7 +1,7 @@
 package ru.spbau.mit.input;
 
 import ru.spbau.mit.core.GameState;
-import ru.spbau.mit.core.Player;
+import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 

@@ -1,4 +1,4 @@
-package ru.spbau.mit.core;
+package ru.spbau.mit.characters;
 
 import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.GUI.TerminalGUI;

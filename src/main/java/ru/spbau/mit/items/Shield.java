@@ -1,6 +1,6 @@
 package ru.spbau.mit.items;
 
-import ru.spbau.mit.core.Stats;
+import ru.spbau.mit.characters.Stats;
 
 public class Shield extends Item {
     private static final String DEFAULT_NAME = "Shield";
