@@ -1,4 +1,4 @@
-package ru.spbau.mit.core;
+package ru.spbau.mit.characters;
 
 public class Stats {
     private int health;

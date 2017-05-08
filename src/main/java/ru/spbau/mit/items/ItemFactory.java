@@ -3,7 +3,7 @@ package ru.spbau.mit.items;
 // TODO : Implement - this is a placeholder
 
 import org.jetbrains.annotations.NotNull;
-import ru.spbau.mit.core.Stats;
+import ru.spbau.mit.characters.Stats;
 
 public final class ItemFactory {
     private ItemFactory(){}

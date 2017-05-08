@@ -1,6 +1,4 @@
-package ru.spbau.mit.mobs;
-
-import ru.spbau.mit.core.Stats;
+package ru.spbau.mit.characters;
 
 public class Monster extends Mob {
     private static final char DEFAULT_ICON = '⏧';
