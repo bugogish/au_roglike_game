@@ -50,7 +50,5 @@ public final class InputHandler {
             default:
                 return gameState -> {};
         }
-
     }
-
 }

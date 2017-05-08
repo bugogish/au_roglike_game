@@ -1,14 +1,14 @@
 package ru.spbau.mit.input;
 
-import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.characters.Player;
+import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.utils.Cell;
 import ru.spbau.mit.utils.Direction;
 
-import java.io.IOException;
-
 public class MoveAction implements KeyboardAction {
-    private static int stepsLeft = GameState.MAX_TURN_STEPS;
+    private final static int MAX_TURN_STEPS = 1;
+    private static int stepsLeft = MAX_TURN_STEPS;
+
     private Direction direction;
     private GameState gameState;
 
@@ -23,17 +23,16 @@ public class MoveAction implements KeyboardAction {
     }
 
     private void refreshSteps() {
-        stepsLeft = GameState.MAX_TURN_STEPS;
+        stepsLeft = MAX_TURN_STEPS;
     }
 
     @Override
     public void doAction(GameState gameState) {
-        Player player = gameState.getPlayer();
         this.gameState = gameState;
+        Player player = gameState.getPlayer();
         Cell newPosition = player.maybeMove(direction);
 
         if (isStepAllowed(newPosition)) {
-//            gameState.getCurrentMap().replace(player.getCurrentPosition(), newPosition);
             player.redrawTo(newPosition);
             stepsLeft--;
         }
