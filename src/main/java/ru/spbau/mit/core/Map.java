@@ -1,5 +1,6 @@
 package ru.spbau.mit.core;
 
+import com.googlecode.lanterna.TerminalPosition;
 import org.jetbrains.annotations.Nullable;
 import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.items.Item;

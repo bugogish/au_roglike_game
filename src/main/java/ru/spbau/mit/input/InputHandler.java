@@ -2,14 +2,10 @@ package ru.spbau.mit.input;
 
 
 import com.googlecode.lanterna.input.KeyStroke;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.utils.Direction;
-
-import java.io.IOException;
 
 public final class InputHandler {
     private InputHandler() {}
@@ -27,11 +23,11 @@ public final class InputHandler {
                 return GameState::setGameOver;
 
             case Character:
-                char pressedChar = key.getCharacter();
-                if (pressedChar == ' ') {
+                char pressed = key.getCharacter();
+                if (pressed == ' ') {
                     return gameState -> gameState.setPlayersTurn(false);
-                } else if (pressedChar == 'i') {
-                    return new OpenInventoryAction();
+                } else if (pressed == 'i') {
+                    return new InventoryAction();
                 }
 
             case ArrowDown:

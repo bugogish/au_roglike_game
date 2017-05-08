@@ -13,7 +13,7 @@ import java.util.Set;
 
 
 public class GameState {
-    private final static int NUMBER_OF_MOBS = 0;
+    private final static int NUMBER_OF_MOBS = 25;
 
     private final Player player = new Player();
     private Map currentMap = new Map(TerminalGUI.getMaxRow(), TerminalGUI.getMaxColumn());
@@ -24,6 +24,18 @@ public class GameState {
 
     public GameState() {
         generateMobs();
+    }
+
+    private void generateMobs() {
+        for (int i = 0; i < NUMBER_OF_MOBS; i++) {
+            Mob mob = MobsFactory.createRandomMob();
+            Cell position = currentMap.getFreeRandomPosition();
+            mob.setCurrentPosition(position);
+            currentMap.occupyCell(mob.getCurrentPosition());
+            mobs.add(mob);
+        }
+
+        mobs.forEach(Drawable::draw);
     }
 
     public boolean isGameOver() {
@@ -40,18 +52,6 @@ public class GameState {
 
     public void setPlayersTurn(boolean playersTurn) {
         this.playersTurn = playersTurn;
-    }
-
-    private void generateMobs() {
-        for (int i = 0; i < NUMBER_OF_MOBS; i++) {
-            Mob mob = MobsFactory.createRandomMob();
-            Cell position = currentMap.getFreeRandomPosition();
-            mob.setCurrentPosition(position);
-            currentMap.occupyCell(mob.getCurrentPosition());
-            mobs.add(mob);
-        }
-
-        mobs.forEach(Drawable::draw);
     }
 
     public boolean isFightSituation() {

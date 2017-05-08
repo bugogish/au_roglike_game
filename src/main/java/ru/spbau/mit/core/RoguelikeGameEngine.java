@@ -4,8 +4,12 @@ import ru.spbau.mit.GUI.TerminalGUI;
 
 
 public class RoguelikeGameEngine {
+    private static final String MANUAL_TITLE = "Manual";
+    private static final String MANUAL_TEXT = "Move character - arrows\nOpen inventory - i\nSkip turn - Spacebar";
+
     private GameState gameState;
     private GameplayManager gameplayManager;
+
 
     public void start() {
         initialize();
@@ -17,7 +21,7 @@ public class RoguelikeGameEngine {
 
     private void initialize() {
         TerminalGUI.initialize();
-        TerminalGUI.showMessageDialog("Manual", "Move character - arrows\nOpen inventory - i\nSkip turn - Spacebar");
+        TerminalGUI.showMessageDialog(MANUAL_TITLE, MANUAL_TEXT);
         gameState = new GameState();
         gameplayManager = new GameplayManager(gameState);
     }

@@ -94,7 +94,7 @@ public final class TerminalGUI {
     }
 
     @NotNull
-    public static MultiWindowTextGUI createNewScreen() {
+    public static MultiWindowTextGUI openNewScreen() {
         return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
 
