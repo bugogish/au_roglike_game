@@ -5,7 +5,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.core.GameState;
-import ru.spbau.mit.utils.Direction;
+import ru.spbau.mit.core.Direction;
 
 public final class InputHandler {
     private InputHandler() {}

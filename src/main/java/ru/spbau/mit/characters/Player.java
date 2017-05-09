@@ -1,5 +1,7 @@
 package ru.spbau.mit.characters;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Dagger;
 import ru.spbau.mit.items.Heal;
@@ -10,6 +12,7 @@ public class Player extends Character {
     private static final char DEFAULT_ICON = '⛹';
     private static final Stats BASE_STATS = new Stats(100, 45, 1);
     private static final double ARMOR_POWER_DECREASE = 0.2;
+    private static final Logger logger = LogManager.getLogger(Player.class);
 
     private Inventory mInventory = new Inventory();
     private Item weaponEquipped = null;
@@ -38,31 +41,40 @@ public class Player extends Character {
 
         if (item instanceof Dagger) {
             weaponEquipped = null;
+            logger.info("Weapon unequipped, current stats: {}", getStats());
         }
 
         if (item instanceof Shield) {
             defenceEquipped = null;
+            logger.info("Defence unequipped, current stats: {}", getStats());
         }
     }
 
     public void equipItem(Item item) {
         if (item instanceof Dagger) {
-            unEquipItem(item);
+            if (weaponEquipped != null) {
+                unEquipItem(weaponEquipped);
+            }
             getStats().addStats(item.getStats());
             weaponEquipped = item;
             weaponEquipped.setEquipped(true);
+            logger.info("Weapon equipped, current stats: {}", getStats());
         }
 
         if (item instanceof Shield) {
-            unEquipItem(item);
+            if (defenceEquipped != null) {
+                unEquipItem(defenceEquipped);
+            }
             getStats().addStats(item.getStats());
             defenceEquipped = item;
             defenceEquipped.setEquipped(true);
+            logger.info("Defence equipped, current stats: {}", getStats());
         }
 
         if (item instanceof Heal) {
             getStats().addStats(item.getStats());
             mInventory.dropItem(item);
+            logger.info("Heal used, current stats: {}", getStats());
         }
     }
 

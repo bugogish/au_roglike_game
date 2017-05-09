@@ -43,4 +43,9 @@ public class Stats {
         this.stamina += another.stamina;
         this.armor += another.armor;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Health: %s, Stamina: %s, Armor: %s", health, stamina, armor);
+    }
 }

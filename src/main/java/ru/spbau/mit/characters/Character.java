@@ -1,8 +1,8 @@
 package ru.spbau.mit.characters;
 
 import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.utils.Cell;
-import ru.spbau.mit.utils.Direction;
+import ru.spbau.mit.core.Cell;
+import ru.spbau.mit.core.Direction;
 
 public abstract class Character extends Drawable {
     private Stats currentStats;
