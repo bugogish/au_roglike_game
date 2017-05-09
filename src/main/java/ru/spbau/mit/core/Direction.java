@@ -1,4 +1,4 @@
-package ru.spbau.mit.utils;
+package ru.spbau.mit.core;
 
 public enum Direction {
     UP,

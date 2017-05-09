@@ -1,4 +1,4 @@
-package ru.spbau.mit.utils;
+package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
 import ru.spbau.mit.GUI.TerminalGUI;

@@ -1,6 +1,6 @@
 package ru.spbau.mit.GUI;
 
-import ru.spbau.mit.utils.Cell;
+import ru.spbau.mit.core.Cell;
 
 public abstract class Drawable {
     private Cell currentPosition;

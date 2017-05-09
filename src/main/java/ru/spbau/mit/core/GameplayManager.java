@@ -14,8 +14,8 @@ public final class GameplayManager {
     private MobsAI mobsAI;
 
     public GameplayManager(GameState gameState) {
-        mobsAI = new MobsAI(gameState);
         this.gameState = gameState;
+        mobsAI = new MobsAI(gameState);
     }
 
     void handlePlayersTurn() {
@@ -62,5 +62,7 @@ public final class GameplayManager {
             logger.info("Mob is dead");
             gameState.removeMob(opponent);
         }
+
+        logger.info("Players health after fight {}", player.getStats().getHealth());
     }
 }

@@ -2,8 +2,8 @@ package ru.spbau.mit.input;
 
 import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.core.GameState;
-import ru.spbau.mit.utils.Cell;
-import ru.spbau.mit.utils.Direction;
+import ru.spbau.mit.core.Cell;
+import ru.spbau.mit.core.Direction;
 
 public class MoveAction implements KeyboardAction {
     private final static int MAX_TURN_STEPS = 2;

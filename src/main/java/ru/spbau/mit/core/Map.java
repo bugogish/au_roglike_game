@@ -1,12 +1,10 @@
 package ru.spbau.mit.core;
 
-import com.googlecode.lanterna.TerminalPosition;
 import org.jetbrains.annotations.Nullable;
 import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.items.Item;
 import ru.spbau.mit.items.ItemFactory;
 import ru.spbau.mit.items.ItemType;
-import ru.spbau.mit.utils.Cell;
 
 import java.util.*;
 

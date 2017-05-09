@@ -5,7 +5,6 @@ import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.characters.mobs.Mob;
 import ru.spbau.mit.characters.mobs.MobsFactory;
 import ru.spbau.mit.characters.Player;
-import ru.spbau.mit.utils.Cell;
 
 import java.util.HashSet;
 import java.util.Optional;

@@ -2,8 +2,8 @@ package ru.spbau.mit.characters.mobs;
 
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Map;
-import ru.spbau.mit.utils.Cell;
-import ru.spbau.mit.utils.Direction;
+import ru.spbau.mit.core.Cell;
+import ru.spbau.mit.core.Direction;
 
 import java.util.Random;
 import java.util.Set;
