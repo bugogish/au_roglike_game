@@ -34,7 +34,6 @@ public class MobsAI {
         return position;
     }
 
-    // TODO : THIS NEEDS TO BE REDONE
     private Cell moveToTarget(Mob mob, Cell target) {
         Cell position = mob.getCurrentPosition();
         Cell newPosition = position;
@@ -73,7 +72,6 @@ public class MobsAI {
         for (Mob mob : mobs) {
             Cell position;
             if (isInTargetsRadius(mob.getCurrentPosition(), target)) {
-                // TODO : Mob still can eat an obstacle (fix it)
                 position = moveToTarget(mob, target);
             } else {
                 position = moveRandom(mob);

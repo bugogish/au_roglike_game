@@ -70,7 +70,6 @@ public class Map {
         return position;
     }
 
-    // TODO : ???
     public void redrawContents() {
         obstacles.forEach(Drawable::draw);
         items.forEach(Drawable::draw);

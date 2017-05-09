@@ -33,8 +33,11 @@ public class InventoryAction implements KeyboardAction {
                 ab.addAction(
                         String.valueOf(item.getIcon()).concat(item.isEquipped() ? "  [Equipped]" : ""),
                         () -> {
-                            if (!item.isEquipped()) gameState.getPlayer().equipItem(item);
-                            else {gameState.getPlayer().unEquipItem(item);}
+                            if (!item.isEquipped()) {
+                                gameState.getPlayer().equipItem(item);
+                            } else {
+                                gameState.getPlayer().unEquipItem(item);
+                            }
                         }
                 );
             }

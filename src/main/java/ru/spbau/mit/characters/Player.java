@@ -80,6 +80,7 @@ public class Player extends Character {
 
     @Override
     public int getFightPower() {
-        return Math.max(0, (int) Math.round(getStats().getStamina() - getStats().getArmor() * ARMOR_POWER_DECREASE));
+        return Math.max(0, (int) Math.round(getStats().getStamina()
+                - getStats().getArmor() * ARMOR_POWER_DECREASE));
     }
 }
