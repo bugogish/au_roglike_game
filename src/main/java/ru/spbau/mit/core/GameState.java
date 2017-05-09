@@ -22,6 +22,7 @@ public class GameState {
 
 
     public GameState() {
+        player.draw();
         generateMobs();
     }
 

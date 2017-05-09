@@ -17,6 +17,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
+/**
+ * Class for GUI operations
+ */
+
 public final class TerminalGUI {
     private static final Logger logger = LogManager.getLogger(TerminalGUI.class);
     private static Terminal terminal = null;
@@ -26,6 +30,9 @@ public final class TerminalGUI {
 
     private TerminalGUI() {}
 
+    /**
+     * initializes and starts GUI
+     */
     public static void initialize() {
         if (terminal == null) {
             try {
@@ -50,12 +57,20 @@ public final class TerminalGUI {
         return maxX;
     }
 
+    /**
+     * Shows new non-interactive informational Screen
+     * @param title - title of the new Screen
+     * @param text - text that will be shown on new Screen
+     */
     public static void showMessageDialog(String title, String text) {
         final WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
         MessageDialog.showMessageDialog(textGUI, title, text);
         screen.clear();
     }
 
+    /**
+     * Shows drawable objects on terminal
+     */
     public static void addToTerminal(Drawable... items) {
         for (Drawable item : items) {
             screen.setCharacter(item.getCurrentPosition(),
@@ -69,6 +84,9 @@ public final class TerminalGUI {
         }
     }
 
+    /**
+     * removes specified objects from terminal
+     */
     public static void removeFromTerminal(Drawable... items) {
         for (Drawable item : items) {
             screen.setCharacter(item.getCurrentPosition(),
@@ -83,6 +101,9 @@ public final class TerminalGUI {
 
     }
 
+    /**
+     * @return key pressed by user
+     */
     @Nullable
     public static KeyStroke readInput() {
         try {
@@ -93,11 +114,17 @@ public final class TerminalGUI {
         return null;
     }
 
+    /**
+     * Opens new interactive Screen
+     */
     @NotNull
     public static MultiWindowTextGUI openNewScreen() {
         return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
 
+    /**
+     * terminates GUI
+     */
     public static void terminate() {
         try {
             terminal.close();

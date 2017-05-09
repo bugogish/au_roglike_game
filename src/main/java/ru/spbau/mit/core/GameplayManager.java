@@ -8,6 +8,10 @@ import ru.spbau.mit.characters.mobs.MobsAI;
 import ru.spbau.mit.input.InputHandler;
 import ru.spbau.mit.items.Item;
 
+/**
+ * Class that manages Player's turn and AI's turn
+ */
+
 public final class GameplayManager {
     private static final Logger logger = LogManager.getLogger(GameplayManager.class);
     private final GameState gameState;
@@ -18,6 +22,9 @@ public final class GameplayManager {
         mobsAI = new MobsAI(gameState);
     }
 
+    /**
+     * processes player's actions and game response on them
+     */
     void handlePlayersTurn() {
         gameState.setPlayersTurn(true);
 
@@ -27,12 +34,19 @@ public final class GameplayManager {
         }
     }
 
+    /**
+     * processes mobs' actions and game response on them
+     */
     void handleAIsTurn() {
         mobsAI.moveMobs();
         handleGameResponse();
         gameState.setPlayersTurn(true);
     }
 
+    /**
+     * checks if characters' actions resulted in fight or possibility for picking an item
+     * and handles them if so
+     */
     private void handleGameResponse() {
         Player player = gameState.getPlayer();
 
@@ -47,6 +61,9 @@ public final class GameplayManager {
         }
     }
 
+    /**
+     * processes fight situation
+     */
     private void handleFight() {
         Player player = gameState.getPlayer();
         Mob opponent = gameState.getAttackingMob().get();

@@ -7,6 +7,9 @@ import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Item;
 
+/**
+ * Class that opens Inventory screen if 'i' character was pressed
+ */
 public class InventoryAction implements KeyboardAction {
     private GameState gameState;
 
@@ -17,12 +20,18 @@ public class InventoryAction implements KeyboardAction {
         restoreScreen();
     }
 
+    /**
+     * restores screen back to game after inventory is closed
+     */
     private void restoreScreen() {
         gameState.getPlayer().draw();
         gameState.getMobs().forEach(Drawable::draw);
         gameState.getCurrentMap().redrawContents();
     }
 
+    /**
+     * opens a screen with inventory view
+     */
     private void openInventoryView() {
         ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(Inventory.TITLE);
 

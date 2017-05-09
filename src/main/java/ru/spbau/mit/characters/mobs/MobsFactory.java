@@ -4,9 +4,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
+/**
+ * Class to create mobs by their type
+ */
 public final class MobsFactory {
     private MobsFactory() {};
 
+    /**
+     * @param type - type of mob to create, default is @code{Creep}
+     * @return - new Mob of specified type
+     */
     @NotNull
     public static Mob createMob(MobType type) {
         switch (type) {
@@ -21,6 +28,9 @@ public final class MobsFactory {
         }
     }
 
+    /**
+     * @return creates new Mob of random type
+     */
     @NotNull
     public static Mob createRandomMob() {
         Random rand = new Random();
