@@ -7,9 +7,15 @@ import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Direction;
 
+/**
+ * Class that processes user's input into game actions
+ */
 public final class InputHandler {
     private InputHandler() {}
 
+    /**
+     * @return an action for user specified key, default does nothing
+     */
     @NotNull
     public static KeyboardAction handleInput() {
         KeyStroke key = TerminalGUI.readInput();

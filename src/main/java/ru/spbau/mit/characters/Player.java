@@ -2,6 +2,7 @@ package ru.spbau.mit.characters;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Dagger;
 import ru.spbau.mit.items.Heal;
@@ -20,7 +21,6 @@ public class Player extends Character {
 
     public Player() {
         super(DEFAULT_ICON, BASE_STATS);
-        draw();
     }
 
     public Player(char icon, Stats baseStats) {
@@ -35,7 +35,7 @@ public class Player extends Character {
         return mInventory;
     }
 
-    public void unEquipItem(Item item) {
+    public void unEquipItem(@NotNull Item item) {
         item.setEquipped(false);
         getStats().subtractStats(item.getStats());
 
@@ -50,14 +50,15 @@ public class Player extends Character {
         }
     }
 
-    public void equipItem(Item item) {
+    public void equipItem(@NotNull Item item) {
+        item.setEquipped(true);
+
         if (item instanceof Dagger) {
             if (weaponEquipped != null) {
                 unEquipItem(weaponEquipped);
             }
             getStats().addStats(item.getStats());
             weaponEquipped = item;
-            weaponEquipped.setEquipped(true);
             logger.info("Weapon equipped, current stats: {}", getStats());
         }
 
@@ -67,7 +68,6 @@ public class Player extends Character {
             }
             getStats().addStats(item.getStats());
             defenceEquipped = item;
-            defenceEquipped.setEquipped(true);
             logger.info("Defence equipped, current stats: {}", getStats());
         }
 

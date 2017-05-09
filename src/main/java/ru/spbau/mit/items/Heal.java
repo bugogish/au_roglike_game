@@ -3,6 +3,9 @@ package ru.spbau.mit.items;
 
 import ru.spbau.mit.characters.Stats;
 
+/**
+ * Class for a healing item
+ */
 public class Heal extends Item {
     private static final String DEFAULT_NAME = "Heal";
     private static final char DEFAULT_ICON = '❤';

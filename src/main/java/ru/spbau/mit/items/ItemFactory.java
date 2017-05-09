@@ -3,9 +3,16 @@ package ru.spbau.mit.items;
 import org.jetbrains.annotations.NotNull;
 import ru.spbau.mit.characters.Stats;
 
+/**
+ * Class that creates Items of specified type
+ */
 public final class ItemFactory {
     private ItemFactory(){}
 
+    /**
+     * creates Item of specified type with default settings,
+     * default Item is Dagger
+     */
     @NotNull
     public static Item createDefaultItem(ItemType type) {
         switch (type) {
@@ -20,6 +27,12 @@ public final class ItemFactory {
         }
     }
 
+    /**
+     * creates slightly customized Item
+     * @param type - type of an Item to create
+     * @param description - Item's description
+     * @param change - Change an Item does to player's stats if equipped
+     */
     @NotNull
     public Item createWithDescriptionAndStats(ItemType type, String description, Stats change) {
         switch (type) {
@@ -32,6 +45,14 @@ public final class ItemFactory {
         }
     }
 
+    /**
+     * creates fully customized Item
+     * @param type - type of Item to create
+     * @param name - Item's name
+     * @param description - Item's description
+     * @param change - Change an Item does to player's stats if equipped
+     * @param icon - Item's icon for displaying on GUI
+     */
     @NotNull
     public Item createCustomItem(ItemType type, String name, String description, Stats change, char icon) {
         switch (type) {

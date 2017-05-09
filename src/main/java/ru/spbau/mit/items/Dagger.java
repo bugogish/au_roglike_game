@@ -2,6 +2,9 @@ package ru.spbau.mit.items;
 
 import ru.spbau.mit.characters.Stats;
 
+/**
+ * Class for game's weapon
+ */
 public class Dagger extends Item {
     private static final String DEFAULT_NAME = "Dagger";
     private static final char DEFAULT_ICON = '☭';

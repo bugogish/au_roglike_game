@@ -2,6 +2,9 @@ package ru.spbau.mit.items;
 
 import ru.spbau.mit.characters.Stats;
 
+/**
+ * Class for Defence Item in the game
+ */
 public class Shield extends Item {
     private static final String DEFAULT_NAME = "Shield";
     private static final char DEFAULT_ICON = 'Θ';

@@ -4,6 +4,9 @@ import ru.spbau.mit.GUI.Drawable;
 import ru.spbau.mit.characters.Stats;
 import ru.spbau.mit.core.Cell;
 
+/**
+ * Class for an abstract game Item
+ */
 public abstract class Item extends Drawable {
     private final String itemName;
     private final String description;
@@ -18,6 +21,9 @@ public abstract class Item extends Drawable {
         this.changeToStats = changeToStats;
     }
 
+    /**
+     * @return true if this Item player has this Item equipped now
+     */
     public boolean isEquipped() {
         return equipped;
     }
