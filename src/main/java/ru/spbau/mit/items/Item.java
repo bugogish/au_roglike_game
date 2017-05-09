@@ -10,20 +10,20 @@ public abstract class Item extends Drawable {
     private Stats changeToStats;
     private boolean equipped = false;
 
-    public boolean isEquipped() {
-        return equipped;
-    }
-
-    public void setEquipped(boolean equipped) {
-        this.equipped = equipped;
-    }
-
     public Item(String name, String description, Stats changeToStats, char itemIcon) {
         super(itemIcon, new Cell(0, 0));
 
         itemName = name;
         this.description = description;
         this.changeToStats = changeToStats;
+    }
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
     }
 
     public String getItemName() {
