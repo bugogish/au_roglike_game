@@ -18,42 +18,37 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 /**
- * Class for GUI operations
+ * Class for GUI operations on terminal
  */
 
-public final class TerminalGUI {
+public final class TerminalGUI implements GUI {
     private static final Logger logger = LogManager.getLogger(TerminalGUI.class);
     private static Terminal terminal = null;
     private static Screen screen = null;
     private static int maxX;
     private static int maxY;
 
-    private TerminalGUI() {}
-
-    /**
-     * initializes and starts GUI
-     */
-    public static void initialize() {
-        if (terminal == null) {
-            try {
-                terminal = new DefaultTerminalFactory().createTerminal();
-                terminal.setCursorVisible(false);
-                screen = new TerminalScreen(terminal);
-                screen.startScreen();
-                maxX = screen.getTerminalSize().getRows();
-                maxY = screen.getTerminalSize().getColumns();
-            } catch (IOException e) {
-                logger.fatal(e.getMessage());
-                throw new RuntimeException();
-            }
+    public TerminalGUI() {
+        try {
+            terminal = new DefaultTerminalFactory().createTerminal();
+            terminal.setCursorVisible(false);
+            screen = new TerminalScreen(terminal);
+            screen.startScreen();
+            maxX = screen.getTerminalSize().getRows();
+            maxY = screen.getTerminalSize().getColumns();
+        } catch (IOException e) {
+            logger.fatal(e.getMessage());
+            throw new RuntimeException();
         }
     }
 
-    public static int getMaxColumn() {
+    @Override
+    public int getMaxColumn() {
         return maxY;
     }
 
-    public static int getMaxRow() {
+    @Override
+    public int getMaxRow() {
         return maxX;
     }
 
@@ -62,16 +57,29 @@ public final class TerminalGUI {
      * @param title - title of the new Screen
      * @param text - text that will be shown on new Screen
      */
-    public static void showMessageDialog(String title, String text) {
+    @Override
+    public void showInfoScreen(String title, String text) {
         final WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
         MessageDialog.showMessageDialog(textGUI, title, text);
         screen.clear();
     }
 
+    @Override
+    public void showOnScreen(Drawable item) {
+        screen.setCharacter(item.getCurrentPosition(),
+                new TextCharacter(item.getIcon(), TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
+        try {
+            screen.refresh();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
     /**
      * Shows drawable objects on terminal
      */
-    public static void addToTerminal(Drawable... items) {
+    @Override
+    public void showOnScreen(Iterable<? extends Drawable> items) {
         for (Drawable item : items) {
             screen.setCharacter(item.getCurrentPosition(),
                     new TextCharacter(item.getIcon(), TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
@@ -84,10 +92,24 @@ public final class TerminalGUI {
         }
     }
 
+    @Override
+    public void removeFromScreen(Drawable item) {
+            screen.setCharacter(item.getCurrentPosition(),
+                    new TextCharacter(' ', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
+
+        try {
+            screen.refresh();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+
+    }
+
     /**
      * removes specified objects from terminal
      */
-    public static void removeFromTerminal(Drawable... items) {
+    @Override
+    public void removeFromScreen(Iterable<? extends Drawable> items) {
         for (Drawable item : items) {
             screen.setCharacter(item.getCurrentPosition(),
                     new TextCharacter(' ', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK));
@@ -104,8 +126,9 @@ public final class TerminalGUI {
     /**
      * @return key pressed by user
      */
+    @Override
     @Nullable
-    public static KeyStroke readInput() {
+    public KeyStroke readInput() {
         try {
             return screen.readInput();
         } catch (IOException e) {
@@ -118,14 +141,14 @@ public final class TerminalGUI {
      * Opens new interactive Screen
      */
     @NotNull
-    public static MultiWindowTextGUI openNewScreen() {
+    public MultiWindowTextGUI openNewScreen() {
         return new MultiWindowTextGUI(screen, TextColor.ANSI.BLACK);
     }
 
     /**
      * terminates GUI
      */
-    public static void terminate() {
+    public void terminate() {
         try {
             terminal.close();
         } catch (IOException e) {

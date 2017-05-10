@@ -2,6 +2,7 @@ package ru.spbau.mit.items;
 
 
 import ru.spbau.mit.characters.Stats;
+import ru.spbau.mit.core.Cell;
 
 /**
  * Class for a healing item
@@ -11,15 +12,15 @@ public class Heal extends Item {
     private static final char DEFAULT_ICON = '❤';
     private static final Stats DEFAULT_STATS = new Stats(10, 0, 0);
 
-    public Heal(String name, String description, Stats changeToStats, char icon) {
-        super(name, description, changeToStats, icon);
+    public Heal(String name, Stats changeToStats, char icon, Cell position) {
+        super(name, changeToStats, icon, position);
     }
 
-    public Heal(String description, Stats changeToStats) {
-        this(DEFAULT_NAME, description, changeToStats, DEFAULT_ICON);
+    public Heal(Stats changeToStats, Cell position) {
+        this(DEFAULT_NAME, changeToStats, DEFAULT_ICON, position);
     }
 
-    public Heal() {
-        this(DEFAULT_NAME, "", DEFAULT_STATS, DEFAULT_ICON);
+    public Heal(Cell position) {
+        this(DEFAULT_NAME, DEFAULT_STATS, DEFAULT_ICON, position);
     }
 }

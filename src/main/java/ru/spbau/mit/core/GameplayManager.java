@@ -2,6 +2,7 @@ package ru.spbau.mit.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.spbau.mit.GUI.GUI;
 import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.characters.mobs.Mob;
 import ru.spbau.mit.characters.mobs.MobsAI;
@@ -9,17 +10,25 @@ import ru.spbau.mit.input.InputHandler;
 import ru.spbau.mit.items.Item;
 
 /**
- * Class that manages Player's turn and AI's turn
+ * Class that manages Player's turn and AI's turn logic
  */
 
 public final class GameplayManager {
     private static final Logger logger = LogManager.getLogger(GameplayManager.class);
+    private final GUI myGUI;
     private final GameState gameState;
+    private final InputHandler inputHandler;
     private MobsAI mobsAI;
 
-    public GameplayManager(GameState gameState) {
+    public GameplayManager(GameState gameState, GUI myGUI) {
         this.gameState = gameState;
+        this.myGUI = myGUI;
+        this.inputHandler = new InputHandler(myGUI);
         mobsAI = new MobsAI(gameState);
+
+        myGUI.showOnScreen(gameState.getPlayer());
+        myGUI.showOnScreen(gameState.getCurrentMap().getContents());
+        myGUI.showOnScreen(gameState.getMobs());
     }
 
     /**
@@ -29,7 +38,7 @@ public final class GameplayManager {
         gameState.setPlayersTurn(true);
 
         while (gameState.isPlayersTurn()) {
-            InputHandler.handleInput().doAction(gameState);
+            inputHandler.handleInput().doAction(gameState);
             handleGameResponse();
         }
     }
@@ -38,7 +47,10 @@ public final class GameplayManager {
      * processes mobs' actions and game response on them
      */
     void handleAIsTurn() {
+        myGUI.removeFromScreen(gameState.getMobs());
         mobsAI.moveMobs();
+        myGUI.showOnScreen(gameState.getMobs());
+
         handleGameResponse();
         gameState.setPlayersTurn(true);
     }
@@ -49,15 +61,16 @@ public final class GameplayManager {
      */
     private void handleGameResponse() {
         Player player = gameState.getPlayer();
+        Map map = gameState.getCurrentMap();
 
         if (gameState.isFightSituation()) {
             handleFight();
         }
 
-        Item maybeItem = gameState.getCurrentMap().getItemByPosition(player.getCurrentPosition());
+        Item maybeItem = map.getItemByPosition(player.getCurrentPosition());
         if (maybeItem != null) {
             player.pickUp(maybeItem);
-            gameState.getCurrentMap().removeItem(maybeItem);
+            map.removeItem(maybeItem);
         }
     }
 

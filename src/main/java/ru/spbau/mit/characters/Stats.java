@@ -1,5 +1,8 @@
 package ru.spbau.mit.characters;
 
+/**
+ * Class for representing stats available in game.
+ */
 public class Stats {
     private int health;
     private int stamina;
@@ -10,6 +13,7 @@ public class Stats {
         this.stamina = stamina;
         this.armor = armor;
     }
+
     public Stats(Stats stats) {
         this.health = stats.getHealth();
         this.stamina = stats.getStamina();
@@ -28,16 +32,25 @@ public class Stats {
         return armor;
     }
 
+    /**
+     * subtracts health by delta
+     */
     public void decreaseHealth(int delta) {
         health -= delta;
     }
 
+    /**
+     * subtracts health, stamina and armor by another's values
+     */
     public void subtractStats(Stats another) {
         this.health -= another.health;
         this.stamina -= another.stamina;
         this.armor -= another.armor;
     }
 
+    /**
+     * adds to health, stamina and armor values of another
+     */
     public void addStats(Stats another) {
         this.health += another.health;
         this.stamina += another.stamina;

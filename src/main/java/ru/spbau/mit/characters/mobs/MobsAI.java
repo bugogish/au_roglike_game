@@ -1,9 +1,10 @@
 package ru.spbau.mit.characters.mobs;
 
-import ru.spbau.mit.core.GameState;
-import ru.spbau.mit.core.Map;
+
 import ru.spbau.mit.core.Cell;
 import ru.spbau.mit.core.Direction;
+import ru.spbau.mit.core.GameState;
+import ru.spbau.mit.core.Map;
 
 import java.util.Random;
 import java.util.Set;
@@ -93,15 +94,15 @@ public class MobsAI {
         Map map = gameState.getCurrentMap();
 
         for (Mob mob : mobs) {
-            Cell position;
+            Cell newPosition;
             if (isInTargetsRadius(mob.getCurrentPosition(), target)) {
-                position = moveToTarget(mob, target);
+                newPosition = moveToTarget(mob, target);
             } else {
-                position = moveRandom(mob);
+                newPosition = moveRandom(mob);
             }
 
-            map.replace(mob.getCurrentPosition(), position);
-            mob.redrawTo(position);
+            map.replace(mob.getCurrentPosition(), newPosition);
+            mob.moveTo(newPosition);
         }
     }
 }

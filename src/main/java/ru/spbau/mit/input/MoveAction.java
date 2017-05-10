@@ -1,9 +1,10 @@
 package ru.spbau.mit.input;
 
+import ru.spbau.mit.GUI.GUI;
 import ru.spbau.mit.characters.Player;
-import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Cell;
 import ru.spbau.mit.core.Direction;
+import ru.spbau.mit.core.GameState;
 
 /**
  * Class that handles user's movement if one of the arrows was pressed
@@ -12,10 +13,12 @@ public class MoveAction implements KeyboardAction {
     private static final int MAX_TURN_STEPS = 2;
     private static int stepsLeft = MAX_TURN_STEPS;
 
+    private final GUI myGUI;
     private Direction direction;
     private GameState gameState;
 
-    MoveAction(Direction direction) {
+    MoveAction(GUI myGUI, Direction direction) {
+        this.myGUI = myGUI;
         this.direction = direction;
     }
 
@@ -26,7 +29,9 @@ public class MoveAction implements KeyboardAction {
         Cell newPosition = gameState.getCurrentMap().getValidPosition(player.maybeMove(direction));
 
         if (isStepAllowed(newPosition)) {
-            player.redrawTo(newPosition);
+            myGUI.removeFromScreen(player);
+            player.moveTo(newPosition);
+            myGUI.showOnScreen(player);
             stepsLeft--;
         }
 

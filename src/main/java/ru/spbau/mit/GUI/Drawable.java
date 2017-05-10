@@ -19,31 +19,8 @@ public abstract class Drawable {
         return currentPosition;
     }
 
-    public void setCurrentPosition(Cell current) {
+    protected void setCurrentPosition(Cell current) {
         this.currentPosition = current;
-    }
-
-    /**
-     * shows an object on screen
-     */
-    public void draw() {
-        TerminalGUI.addToTerminal(this);
-    }
-
-    /**
-     * changes object's position and shows in on screen in new place
-     */
-    public void redrawTo(Cell position) {
-        TerminalGUI.removeFromTerminal(this);
-        this.currentPosition = position;
-        TerminalGUI.addToTerminal(this);
-    }
-
-    /**
-     * removes object from screen
-     */
-    public void clear() {
-        TerminalGUI.removeFromTerminal(this);
     }
 
     public char getIcon() {
