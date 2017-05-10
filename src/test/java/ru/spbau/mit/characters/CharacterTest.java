@@ -3,6 +3,7 @@ package ru.spbau.mit.characters;
 import org.junit.Test;
 import ru.spbau.mit.characters.mobs.Boss;
 import ru.spbau.mit.characters.mobs.Mob;
+import ru.spbau.mit.characters.mobs.MobsFactory;
 import ru.spbau.mit.core.Cell;
 import ru.spbau.mit.core.Direction;
 
@@ -15,7 +16,7 @@ public class CharacterTest {
     @Test
     public void fight() {
         Player player = new Player();
-        Mob mob = new Boss();
+        Mob mob = MobsFactory.createRandomMob();
         int playersHealthBefore = player.getStats().getHealth();
         int mobsHealthBefore = mob.getStats().getHealth();
         player.fight(mob);

@@ -3,8 +3,7 @@ package ru.spbau.mit.input;
 import com.googlecode.lanterna.gui2.dialogs.ActionListDialogBuilder;
 import ru.spbau.mit.GUI.GUI;
 import ru.spbau.mit.core.GameState;
-import ru.spbau.mit.core.Inventory;
-import ru.spbau.mit.core.RoguelikeGameEngine;
+import ru.spbau.mit.characters.Inventory;
 import ru.spbau.mit.items.Item;
 
 /**
