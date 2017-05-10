@@ -18,8 +18,6 @@ public abstract class Character extends Drawable {
     /**
      * @param direction - direction to move Character to
      * @return - new Cell for a position in specified direction
-     * if movement is possible (i.e. Character doesn't try to go
-     * outside of the map) and current position otherwise
      */
     public Cell maybeMove(Direction direction) {
         Cell newPosition = getCurrentPosition();
@@ -43,6 +41,10 @@ public abstract class Character extends Drawable {
         }
 
         return newPosition;
+    }
+
+    public void moveTo(Cell position) {
+        setCurrentPosition(position);
     }
 
     /**

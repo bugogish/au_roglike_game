@@ -1,10 +1,8 @@
 package ru.spbau.mit.core;
 
-import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.GUI.TerminalGUI;
+import ru.spbau.mit.characters.Player;
 import ru.spbau.mit.characters.mobs.Mob;
 import ru.spbau.mit.characters.mobs.MobsFactory;
-import ru.spbau.mit.characters.Player;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -15,14 +13,14 @@ public class GameState {
     private static final int NUMBER_OF_MOBS = 25;
 
     private final Player player = new Player();
-    private Map currentMap = new Map(TerminalGUI.getMaxRow(), TerminalGUI.getMaxColumn());
+    private Map currentMap;
     private Set<Mob> mobs = new HashSet<>();
     private boolean playersTurn = false;
     private boolean gameOver = false;
 
 
-    public GameState() {
-        player.draw();
+    public GameState(int maxMapRow, int maxMapColumn) {
+        currentMap = new Map(maxMapRow, maxMapColumn);
         generateMobs();
     }
 
@@ -30,12 +28,10 @@ public class GameState {
         for (int i = 0; i < NUMBER_OF_MOBS; i++) {
             Mob mob = MobsFactory.createRandomMob();
             Cell position = currentMap.getFreeRandomPosition();
-            mob.setCurrentPosition(position);
+            mob.moveTo(position);
             currentMap.occupyCell(mob.getCurrentPosition());
             mobs.add(mob);
         }
-
-        mobs.forEach(Drawable::draw);
     }
 
     public boolean isGameOver() {

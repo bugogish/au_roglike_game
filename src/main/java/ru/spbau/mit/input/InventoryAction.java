@@ -1,10 +1,10 @@
 package ru.spbau.mit.input;
 
 import com.googlecode.lanterna.gui2.dialogs.ActionListDialogBuilder;
-import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.GUI.TerminalGUI;
+import ru.spbau.mit.GUI.GUI;
 import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.core.Inventory;
+import ru.spbau.mit.core.RoguelikeGameEngine;
 import ru.spbau.mit.items.Item;
 
 /**
@@ -12,6 +12,11 @@ import ru.spbau.mit.items.Item;
  */
 public class InventoryAction implements KeyboardAction {
     private GameState gameState;
+    private final GUI myGUI;
+
+    InventoryAction(GUI myGUI) {
+        this.myGUI = myGUI;
+    }
 
     @Override
     public void doAction(GameState gameState) {
@@ -24,9 +29,9 @@ public class InventoryAction implements KeyboardAction {
      * restores screen back to game after inventory is closed
      */
     private void restoreScreen() {
-        gameState.getPlayer().draw();
-        gameState.getMobs().forEach(Drawable::draw);
-        gameState.getCurrentMap().redrawContents();
+        myGUI.showOnScreen(gameState.getPlayer());
+        myGUI.showOnScreen(gameState.getMobs());
+        myGUI.showOnScreen(gameState.getCurrentMap().getContents());
     }
 
     /**
@@ -52,6 +57,6 @@ public class InventoryAction implements KeyboardAction {
             }
         }
 
-        ab.build().showDialog(TerminalGUI.openNewScreen());
+        ab.build().showDialog(myGUI.openNewScreen());
     }
 }

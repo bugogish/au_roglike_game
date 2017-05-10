@@ -9,20 +9,18 @@ import ru.spbau.mit.core.Cell;
  */
 public abstract class Item extends Drawable {
     private final String itemName;
-    private final String description;
     private Stats changeToStats;
     private boolean equipped = false;
 
-    public Item(String name, String description, Stats changeToStats, char itemIcon) {
-        super(itemIcon, new Cell(0, 0));
+    public Item(String name, Stats changeToStats, char itemIcon, Cell position) {
+        super(itemIcon, position);
 
         itemName = name;
-        this.description = description;
         this.changeToStats = changeToStats;
     }
 
     /**
-     * @return true if this Item player has this Item equipped now
+     * @return true if player has this Item equipped now
      */
     public boolean isEquipped() {
         return equipped;

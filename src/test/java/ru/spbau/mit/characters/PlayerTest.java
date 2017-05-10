@@ -1,6 +1,7 @@
 package ru.spbau.mit.characters;
 
 import org.junit.Test;
+import ru.spbau.mit.core.Cell;
 import ru.spbau.mit.items.Dagger;
 import ru.spbau.mit.items.Heal;
 import ru.spbau.mit.items.Item;
@@ -13,7 +14,7 @@ public class PlayerTest {
     @Test
     public void sumplePickUpTest() {
         Player player = new Player();
-        Item item = new Dagger();
+        Item item = new Dagger(new Cell(0, 0));
         player.pickUp(item);
         assert(player.getInventory().getItems().contains(item));
     }
@@ -37,8 +38,8 @@ public class PlayerTest {
 
     @Test
     public void simpleUnEquipTest() throws Exception {
-        testItemUnequip(new Dagger());
-        testItemUnequip(new Shield());
+        testItemUnequip(new Dagger(new Cell(0, 0)));
+        testItemUnequip(new Shield(new Cell(0, 0)));
     }
 
     private void testItemEquip(Item item) {
@@ -59,20 +60,19 @@ public class PlayerTest {
 
     @Test
     public void simpleEquipTest() throws Exception {
-        testItemEquip(new Dagger());
-        testItemEquip(new Shield());
-        testItemEquip(new Heal());
+        testItemEquip(new Dagger(new Cell(0, 0)));
+        testItemEquip(new Shield(new Cell(0, 0)));
+        testItemEquip(new Heal(new Cell(0, 0)));
     }
 
     @Test
     public void twiceEquipShouldntDoubleStats() throws Exception {
         Player player = new Player();
-        Item item = new Dagger();
+        Item item = new Dagger(new Cell(0,0));
         player.equipItem(item);
         Stats before = new Stats(player.getStats());
         player.equipItem(item);
         Stats after = player.getStats();
         assertEquals(before, after);
     }
-
 }

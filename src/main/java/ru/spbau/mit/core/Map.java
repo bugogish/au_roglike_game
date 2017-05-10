@@ -2,12 +2,14 @@ package ru.spbau.mit.core;
 
 import org.jetbrains.annotations.Nullable;
 import ru.spbau.mit.GUI.Drawable;
-import ru.spbau.mit.GUI.TerminalGUI;
 import ru.spbau.mit.items.Item;
 import ru.spbau.mit.items.ItemFactory;
 import ru.spbau.mit.items.ItemType;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Class to control game's map.
@@ -53,19 +55,13 @@ public class Map {
             occupyCell(position);
         }
 
-        obstacles.forEach(Drawable::draw);
-
         while (items.size() < NUMBER_OF_ITEMS) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
-            Item item = ItemFactory.createDefaultItem(randomType);
             Cell position = getFreeRandomPosition();
-
-            item.setCurrentPosition(position);
+            Item item = ItemFactory.createDefaultItem(randomType, position);
             occupyCell(position);
             items.add(item);
         }
-
-        items.forEach(Drawable::draw);
     }
 
     /**
@@ -88,9 +84,11 @@ public class Map {
      * restores map contents on the screen (used to restore state if
      * another screen was opened and then closed)
      */
-    public void redrawContents() {
-        obstacles.forEach(Drawable::draw);
-        items.forEach(Drawable::draw);
+    public Iterable<Drawable> getContents() {
+        Set<Drawable> contents = new HashSet<>();
+        contents.addAll(obstacles);
+        contents.addAll(items);
+        return contents;
     }
 
     /**
@@ -115,6 +113,7 @@ public class Map {
      */
     public void removeItem(Item item) {
         items.remove(item);
+        freeCell(item.getCurrentPosition());
     }
 
     /**
@@ -166,7 +165,7 @@ public class Map {
     }
 
     /**
-     * returns a valid position by using getAcceptbleRow and
+     * returns a valid position by using getAcceptableRow and
      * getColumn from given position
      */
     public Cell getValidPosition(Cell position) {

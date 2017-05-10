@@ -1,7 +1,6 @@
 package ru.spbau.mit.core;
 
 import com.googlecode.lanterna.TerminalPosition;
-import ru.spbau.mit.GUI.TerminalGUI;
 
 /**
  * Class for denoting a position on map
