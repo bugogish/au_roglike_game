@@ -15,8 +15,13 @@ public class PlayerTest {
     public void sumplePickUpTest() {
         Player player = new Player();
         Item item = new Dagger(new Cell(0, 0));
+
+        assertTrue(player.getInventory().isEmpty());
+
         player.pickUp(item);
-        assert(player.getInventory().getItems().contains(item));
+
+        assertFalse(player.getInventory().isEmpty());
+        assertTrue(player.getInventory().getItems().contains(item));
     }
 
     private void testItemUnequip(Item item) {

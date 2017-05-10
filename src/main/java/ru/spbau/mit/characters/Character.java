@@ -43,6 +43,9 @@ public abstract class Character extends Drawable {
         return newPosition;
     }
 
+    /**
+     * changes current Character's position to specified
+     */
     public void moveTo(Cell position) {
         setCurrentPosition(position);
     }
