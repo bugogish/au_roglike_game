@@ -6,6 +6,10 @@ import ru.spbau.mit.core.GameState;
 import ru.spbau.mit.characters.Inventory;
 import ru.spbau.mit.items.Item;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Class that opens Inventory screen if 'i' character was pressed
  */
@@ -37,25 +41,22 @@ public class InventoryAction implements KeyboardAction {
      * opens a screen with inventory view
      */
     private void openInventoryView() {
-        ActionListDialogBuilder ab = new ActionListDialogBuilder().setTitle(Inventory.TITLE);
+        Map<String, Runnable> actions = new HashMap<>();
 
         if (gameState.getPlayer().getInventory().isEmpty()) {
-            ab.addAction("<Empty>", () -> {});
+            actions.put("<Empty>", () -> {});
         } else {
             for (Item item : gameState.getPlayer().getInventory().getItems()) {
-                ab.addAction(
-                        String.valueOf(item.getIcon()).concat(item.isEquipped() ? "  [Equipped]" : ""),
-                        () -> {
-                            if (!item.isEquipped()) {
-                                gameState.getPlayer().equipItem(item);
-                            } else {
-                                gameState.getPlayer().unEquipItem(item);
-                            }
-                        }
-                );
+                String menuOption = String.valueOf(item.getIcon()).concat(item.isEquipped() ? "  [Equipped]" : "");
+                actions.put(menuOption, () -> {
+                    if (!item.isEquipped()) {
+                        gameState.getPlayer().equipItem(item);
+                    } else {
+                        gameState.getPlayer().unEquipItem(item);
+                    }
+                });
             }
         }
-
-        ab.build().showDialog(myGUI.openNewScreen());
+        myGUI.openInventory(Inventory.TITLE, actions);
     }
 }

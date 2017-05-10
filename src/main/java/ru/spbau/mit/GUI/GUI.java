@@ -1,10 +1,13 @@
 package ru.spbau.mit.GUI;
 
-import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyStroke;
+
+import java.util.Map;
 
 public interface GUI {
     void showInfoScreen(String title, String text);
+
+    void openInventory(String screenTitle, Map<String, Runnable> menuActions);
 
     void terminate();
 
@@ -21,6 +24,4 @@ public interface GUI {
     void removeFromScreen(Iterable<? extends Drawable> items);
 
     KeyStroke readInput();
-
-    WindowBasedTextGUI openNewScreen();
 }
