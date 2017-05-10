@@ -6,6 +6,7 @@ import ru.spbau.mit.characters.mobs.Mob;
 import ru.spbau.mit.characters.mobs.MobsFactory;
 import ru.spbau.mit.core.Cell;
 import ru.spbau.mit.core.Direction;
+import ru.spbau.mit.core.GameState;
 
 import javax.print.attribute.standard.Fidelity;
 
@@ -22,6 +23,13 @@ public class CharacterTest {
         player.fight(mob);
         assertEquals(playersHealthBefore - mob.getFightPower(), player.getStats().getHealth());
         assertEquals(mobsHealthBefore - player.getFightPower(), mob.getStats().getHealth());
+    }
+
+    @Test
+    public void isDead() {
+        Player player = new Player();
+        player.getStats().decreaseHealth(player.getStats().getHealth());
+        assertTrue(player.isDead());
     }
 
 }
