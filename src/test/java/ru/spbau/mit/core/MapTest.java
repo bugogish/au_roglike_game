@@ -36,17 +36,18 @@ public class MapTest {
     }
 
     @Test
-    public void removeItem() throws Exception {
+    public void removeItem() {
         Map map = new Map(MAP_SIZE_X, MAP_SIZE_Y);
         Item item = ItemFactory.createDefaultItem(ItemType.DAGGER, new Cell(0, 0));
         map.putItemOnMap(item);
+        assertEquals(1, ((HashSet)map.getContents()).size());
         map.removeItem(item);
         assertTrue(map.isCellFree(item.getCurrentPosition()));
-        assertEquals(new HashSet<Drawable>(), map.getContents());
+        assertEquals(0, ((HashSet)map.getContents()).size());
     }
 
     @Test
-    public void getValidPosition() throws Exception {
+    public void getValidPosition() {
         Map map = new Map(MAP_SIZE_X, MAP_SIZE_Y);
         assertEquals(new Cell(MAP_SIZE_X - 1, MAP_SIZE_Y -1),
                 map.getValidPosition(new Cell(MAP_SIZE_X, MAP_SIZE_Y)));
