@@ -3,7 +3,6 @@ package ru.spbau.mit.characters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import ru.spbau.mit.core.Inventory;
 import ru.spbau.mit.items.Dagger;
 import ru.spbau.mit.items.Heal;
 import ru.spbau.mit.items.Item;

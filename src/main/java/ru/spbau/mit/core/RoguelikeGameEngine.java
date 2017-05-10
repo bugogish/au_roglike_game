@@ -31,7 +31,7 @@ public class RoguelikeGameEngine {
     }
 
     /**
-     * initializes game's GUI and state and shows Welcome Screen
+     * initializes game's state and shows Welcome Screen
      */
     private void startGame() {
         myGUI.showInfoScreen(MANUAL_TITLE, MANUAL_TEXT);

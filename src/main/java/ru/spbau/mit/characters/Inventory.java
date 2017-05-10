@@ -1,4 +1,4 @@
-package ru.spbau.mit.core;
+package ru.spbau.mit.characters;
 
 import ru.spbau.mit.items.Item;
 

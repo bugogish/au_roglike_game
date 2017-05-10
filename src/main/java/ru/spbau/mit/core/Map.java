@@ -37,30 +37,47 @@ public class Map {
                 cells[i][j] = true;
             }
         }
-
-        generate();
     }
 
     /**
-     * generates new random map with @code{NUMBER_OF_OBSTACLES} obstacles
+     * generates new random map contents with @code{NUMBER_OF_OBSTACLES} obstacles
      * and @code{NUMBER_OF_ITEMS} items.
      */
 
-    private void generate() {
+    public void generate() {
         Random rand = new Random();
 
         while (obstacles.size() < NUMBER_OF_OBSTACLES) {
-            Cell position = getFreeRandomPosition();
-            obstacles.add(new Drawable(OBSTACLE_SYMBOL, position) {});
-            occupyCell(position);
+            putObstacleOn(getFreeRandomPosition());
         }
 
         while (items.size() < NUMBER_OF_ITEMS) {
             ItemType randomType = ItemType.values()[rand.nextInt(ItemType.values().length)];
             Cell position = getFreeRandomPosition();
             Item item = ItemFactory.createDefaultItem(randomType, position);
+            putItemOnMap(item);
+        }
+    }
+
+    /**
+     * @param position - position to place new obstacle on, if the cell has already been occupied
+     *                 does nothing
+     */
+    void putObstacleOn(Cell position) {
+        if (isCellFree(position)) {
+            obstacles.add(new Drawable(OBSTACLE_SYMBOL, position) {});
             occupyCell(position);
+        }
+    }
+
+    /**
+     * generates default item of random type and puts it on specified position if the cell was free
+     * otherwise does nothing
+     */
+     void putItemOnMap(Item item) {
+        if (isCellFree(item.getCurrentPosition())) {
             items.add(item);
+            occupyCell(item.getCurrentPosition());
         }
     }
 
@@ -81,7 +98,7 @@ public class Map {
     }
 
     /**
-     * restores map contents on the screen (used to restore state if
+     * @return map displayable contents (used to restore state if
      * another screen was opened and then closed)
      */
     public Iterable<Drawable> getContents() {
@@ -112,8 +129,10 @@ public class Map {
      * removes item from map
      */
     public void removeItem(Item item) {
-        items.remove(item);
-        freeCell(item.getCurrentPosition());
+        if (items.contains(item)) {
+            items.remove(item);
+            freeCell(item.getCurrentPosition());
+        }
     }
 
     /**
@@ -126,14 +145,14 @@ public class Map {
     /**
      * marks given Cell as occupied
      */
-    public void occupyCell(Cell position) {
+    void occupyCell(Cell position) {
         cells[position.getRow()][position.getColumn()] = false;
     }
 
     /**
      * marks given Cell as free
      */
-    public void freeCell(Cell position) {
+    void freeCell(Cell position) {
         cells[position.getRow()][position.getColumn()] = true;
     }
 
@@ -165,8 +184,8 @@ public class Map {
     }
 
     /**
-     * returns a valid position by using getAcceptableRow and
-     * getColumn from given position
+     * returns a valid position by using getValidRow and
+     * getValidColumn from given position
      */
     public Cell getValidPosition(Cell position) {
         return new Cell(getValidColumn(position.getColumn()), getValidRow(position.getRow()));
